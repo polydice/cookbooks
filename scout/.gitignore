@@ -1,0 +1,4 @@
+.bundle
+.chef
+.rvmrc
+Gemfile.lock
