@@ -166,7 +166,7 @@ action :install do
   #set up .jinfo file for update-java-alternatives
   java_name =  app_home.split('/')[-1]
   jinfo_file = "#{app_root}/.#{java_name}.jinfo"
-  if platform_family?("debian") && !::File.exists?(jinfo_file)
+  unless ::File.exists?(jinfo_file)
     description = "Add #{jinfo_file} for debian"
     converge_by(description) do
       Chef::Log.debug "Adding #{jinfo_file} for debian"
@@ -177,13 +177,13 @@ action :install do
           :bin_cmds => new_resource.bin_cmds,
           :name => java_name,
           :app_dir => app_home
-        ) 
+        )
         action :create
       end
     end
     new_resource.updated_by_last_action(true)
   end
-  
+
   #link app_home to app_dir
   Chef::Log.debug "app_home is #{app_home} and app_dir is #{app_dir}"
   current_link = ::File.symlink?(app_home) ? ::File.readlink(app_home) : nil
@@ -196,7 +196,7 @@ action :install do
     end
   end
 
-  #update-alternatives     
+  #update-alternatives
   if new_resource.bin_cmds
     new_resource.bin_cmds.each do |cmd|
 
@@ -233,7 +233,7 @@ action :install do
           new_resource.updated_by_last_action(true)
         end
       end
-      
+
     end
   end
 end

@@ -21,5 +21,4 @@
 package "unzip"
 package "libtool"
 package "autoconf"
-package "autogen" if platform_family?("debian")
-package "gtar" if platform?("freebsd")
+package "autogen"

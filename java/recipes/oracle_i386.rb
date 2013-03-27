@@ -37,15 +37,10 @@ ruby_block  "set-env-java-home" do
   not_if { ENV["JAVA_HOME"] == java_home }
 end
 
-yum_package "glibc" do
-  arch "i686"
-  only_if { platform_family?( "rhel", "fedora" ) }
-end
-
 java_ark "jdk-alt" do
   url tarball_url
   checksum tarball_checksum
-  app_home java_home 
+  app_home java_home
   bin_cmds bin_cmds
   action :install
   default false
