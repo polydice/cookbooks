@@ -12,5 +12,6 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 * [cgriego/chef-scout](https://github.com/cgriego/chef-scout) (commit: 872399)
 * [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: 1bede8)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
+* [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
 * [opscode-cookbooks/java](https://github.com/opscode-cookbooks/java) (commit: c9fe98)
 * [opscode-cookbooks/rsyslog](https://github.com/opscode-cookbooks/rsyslog) (commit: c9ecba)
