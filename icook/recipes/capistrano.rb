@@ -10,7 +10,7 @@
 node[:deploy].each do |application, deploy|
   %w{ assets bundle public tmp }.each do |dir|
     directory "#{deploy[:deploy_to]}/shared/#{dir}" do
-      user deploy[:user]
+      owner deploy[:user]
       group deploy[:group]
       mode 0770
       action :create
