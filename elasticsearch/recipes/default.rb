@@ -73,8 +73,8 @@ ark "elasticsearch" do
   has_binaries ['bin/elasticsearch', 'bin/plugin']
   checksum node.elasticsearch[:checksum]
 
-  notifies :start,   'service[elasticsearch]'
-  notifies :restart, 'service[elasticsearch]'
+  notifies :start,   resources(:service => 'elasticsearch')
+  notifies :restart, resources(:service => 'elasticsearch')
 end
 
 # Increase open file limits
@@ -112,7 +112,7 @@ template "elasticsearch-env.sh" do
   source "elasticsearch-env.sh.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, 'service[elasticsearch]'
+  notifies :restart, resources(:service => 'elasticsearch')
 end
 
 # Create ES config file
@@ -122,7 +122,7 @@ template "elasticsearch.yml" do
   source "elasticsearch.yml.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, 'service[elasticsearch]'
+  notifies :restart, resources(:service => 'elasticsearch')
 end
 
 # Create ES logging file
@@ -132,5 +132,5 @@ template "logging.yml" do
   source "logging.yml.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, 'service[elasticsearch]'
+  notifies :restart, resources(:service => 'elasticsearch')
 end
