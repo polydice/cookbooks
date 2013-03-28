@@ -10,7 +10,7 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
-  template "#{path}/shared/config/application.yml" do
+  template "#{deploy[:deploy_to]}/shared/config/application.yml" do
   source "application.yml.erb"
   mode 0755
   group deploy[:group]
@@ -26,7 +26,7 @@ node[:deploy].each do |application, deploy|
 
   host = node[:opswork][:layers][:redis][:instances][:redis1][:private_ip]
 
-  template "#{path}/shared/config/redis.yml" do
+  template "#{deploy[:deploy_to]}/shared/config/redis.yml" do
     source "redis.yml.erb"
     mode 0755
     group deploy[:group]
@@ -36,7 +36,7 @@ node[:deploy].each do |application, deploy|
     )
   end
 
-  template "#{path}/shared/config/librato.yml" do
+  template "#{deploy[:deploy_to]}/shared/config/librato.yml" do
       source "librato.yml.erb"
       mode 0755
       group deploy[:group]
