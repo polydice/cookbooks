@@ -24,7 +24,7 @@ node[:deploy].each do |application, deploy|
   )
   end
 
-  host = node[:opswork][:layers][:redis][:instances][:redis1][:private_ip]
+  host = node[:opsworks][:layers][:redis][:instances][:redis1][:private_ip]
 
   template "#{deploy[:deploy_to]}/shared/config/redis.yml" do
     source "redis.yml.erb"
