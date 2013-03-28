@@ -1,0 +1,27 @@
+# config/application.yml
+defaults: &defaults
+  aws:
+    access_key_id: "<%= @aws[:access_key_id] %>"
+    secret_access_key: "<%= @aws[:secret_access_key] %>"
+    region: "<%= @aws[:region] %>"
+  facebook:
+    domain: "<%= @facebook[:domain] %>"
+    api_key: "<%= @facebook[:api_key] %>"
+    api_secret: "<%= @facebook[:api_secret] %>"
+    app_access_token: "<%= @facebook[:app_access_token] %>"
+  fog:
+    directory: "<%= @fog[:directory] %>"
+  sendy:
+    url: "<%= @sendy[:url] %>"
+    list_id: "<%= @sendy[:list_id] %>"
+  tire:
+    url: "<%= @elasticsearch[:url] %>"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
