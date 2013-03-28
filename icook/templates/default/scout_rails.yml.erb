@@ -1,0 +1,7 @@
+common: &defaults
+  name: <%= @scout[:name] %>
+  key: <%= @scout[:key] %>
+  monitor: true
+
+production:
+  <<: *defaults

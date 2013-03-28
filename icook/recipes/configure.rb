@@ -45,4 +45,14 @@ node[:deploy].each do |application, deploy|
         "librato" => node[:librato]
       )
   end
+
+  template "#{deploy[:deploy_to]}/shared/config/scout_rails.yml" do
+      source "scout_rails.yml.erb"
+      mode 0755
+      group deploy[:group]
+      owner deploy[:user]
+      variables(
+        "scout" => node[:scout]
+      )
+  end
 end
