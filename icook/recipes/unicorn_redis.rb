@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: icook
-# Recipe:: g
+# Recipe:: unicorn_redis
 #
 # Copyright 2012, Richard Lee
 #
