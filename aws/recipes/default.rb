@@ -17,12 +17,7 @@
 # limitations under the License.
 #
 
-r = gem_package "right_aws" do
-  version node['aws']['right_aws_version']
-  action :nothing
-end
-
-r.run_action(:install)
+OpsWorks::InternalGems.internal_gem_package("right_aws", :version => node['aws']['right_aws_version'])
 
 require 'rubygems'
 Gem.clear_paths
