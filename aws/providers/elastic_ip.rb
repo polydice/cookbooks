@@ -1,10 +1,5 @@
 include Opscode::Aws::Ec2
 
-# Support whyrun
-def whyrun_supported?
-  true
-end
-
 action :associate do
   addr = address(new_resource.ip)
 
@@ -13,10 +8,9 @@ action :associate do
   elsif addr[:instance_id] == instance_id
     Chef::Log.debug("Elastic IP #{new_resource.ip} is already attached to the instance")
   else
-    converge_by("attach Elastic IP #{new_resource.ip} to the instance") do
-      Chef::Log.info("Attaching Elastic IP #{new_resource.ip} to the instance")
-      attach(new_resource.ip, new_resource.timeout)
-    end
+    attach(new_resource.ip, new_resource.timeout)
+    new_resource.updated_by_last_action(true)
+    Chef::Log.info("Attaching Elastic IP #{new_resource.ip} to the instance")
   end
 end
 
@@ -28,10 +22,9 @@ action :disassociate do
   elsif addr[:instance_id] != instance_id
     Chef::Log.debug("Elastic IP #{new_resource.ip} is already detached from the instance")
   else
-    converge_by("detach Elastic IP #{new_resource.ip} from the instance") do
-      Chef::Log.info("Detaching Elastic IP #{new_resource.ip} from the instance")
-      detach(new_resource.ip, new_resource.timeout)
-    end
+    Chef::Log.info("Detaching Elastic IP #{new_resource.ip} from the instance")
+    detach(new_resource.ip, new_resource.timeout)
+    new_resource.updated_by_last_action(true)
   end
 end
 

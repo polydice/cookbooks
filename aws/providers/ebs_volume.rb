@@ -1,10 +1,5 @@
 include Opscode::Aws::Ec2
 
-# Support whyrun
-def whyrun_supported?
-  true
-end
-
 action :create do
   raise "Cannot create a volume with a specific id (EC2 chooses volume ids)" if new_resource.volume_id
   if new_resource.snapshot_id =~ /vol/
@@ -28,29 +23,18 @@ action :create do
       compatible = volume_compatible_with_resource_definition?(attached_volume)
       raise "Volume #{attached_volume[:aws_id]} attached at #{attached_volume[:aws_device]} but does not conform to this resource's specifications" unless compatible
       Chef::Log.debug("The volume matches the resource's definition, so the volume is assumed to be already created")
-      converge_by("update the node data with volume id: #{attached_volume[:aws_id]}") do
-        node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = attached_volume[:aws_id]
-        node.save unless Chef::Config[:solo]
-      end
+      node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = attached_volume[:aws_id]
     else
       # If not, create volume and register its id in the node data
-      converge_by("create a volume with id=#{new_resource.snapshot_id} size=#{new_resource.size} availability_zone=#{new_resource.availability_zone} and update the node data with created volume's id") do
-      nvid = create_volume(new_resource.snapshot_id,
-                           new_resource.size,
-                           new_resource.availability_zone,
-                           new_resource.timeout,
-                           new_resource.volume_type,
-                           new_resource.piops)
-        node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = nvid
-        node.save unless Chef::Config[:solo]
-      end
+      nvid = create_volume(new_resource.snapshot_id, new_resource.size, new_resource.availability_zone, new_resource.timeout)
+      node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = nvid
+      new_resource.updated_by_last_action(true)
     end
+    node.save unless Chef::Config[:solo]
   end
 end
 
 action :attach do
-  # determine_volume returns a Hash, not a Mash, and the keys are
-  # symbols, not strings.
   vol = determine_volume
 
   if vol[:aws_status] == "in-use"
@@ -60,30 +44,26 @@ action :attach do
       Chef::Log.debug("Volume is already attached")
     end
   else
-    converge_by("attach the volume with aws_id=#{vol[:aws_id]} id=#{instance_id} device=#{new_resource.device} and update the node data with created volume's id") do
-      # attach the volume and register its id in the node data
-      attach_volume(vol[:aws_id], instance_id, new_resource.device, new_resource.timeout)
-      # always use a symbol here, it is a Hash
-      node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = vol[:aws_id]
-      node.save unless Chef::Config[:solo]
-    end
+    # attach the volume and register its id in the node data
+    attach_volume(vol[:aws_id], instance_id, new_resource.device, new_resource.timeout)
+    node.set['aws']['ebs_volume'][new_resource.name]['volume_id'] = vol['aws_id']
+    node.save unless Chef::Config[:solo]
+    new_resource.updated_by_last_action(true)
   end
 end
 
 action :detach do
   vol = determine_volume
   return if vol[:aws_instance_id] != instance_id
-  converge_by("detach volume with id: #{vol[:aws_id]}") do
-    detach_volume(vol[:aws_id], new_resource.timeout)
-  end
+  detach_volume(vol[:aws_id], new_resource.timeout)
+  new_resource.updated_by_last_action(true)
 end
 
 action :snapshot do
   vol = determine_volume
-  converge_by("would create a snapshot for volume: #{vol[:aws_id]}") do
-    snapshot = ec2.create_snapshot(vol[:aws_id],new_resource.description)
-    Chef::Log.info("Created snapshot of #{vol[:aws_id]} as #{snapshot[:aws_id]}")
-  end
+  snapshot = ec2.create_snapshot(vol[:aws_id],new_resource.description)
+  new_resource.updated_by_last_action(true)
+  Chef::Log.info("Created snapshot of #{vol[:aws_id]} as #{snapshot[:aws_id]}")
 end
 
 action :prune do
@@ -98,10 +78,9 @@ action :prune do
   end
   if old_snapshots.length > new_resource.snapshots_to_keep 
     old_snapshots[new_resource.snapshots_to_keep, old_snapshots.length].each do |die|
-      converge_by("delete snapshot with id: #{die[:aws_id]}") do
-        Chef::Log.info "Deleting old snapshot #{die[:aws_id]}"
-        ec2.delete_snapshot(die[:aws_id])
-      end
+      Chef::Log.info "Deleting old snapshot #{die[:aws_id]}"
+      ec2.delete_snapshot(die[:aws_id])
+      new_resource.updated_by_last_action(true)
     end
   end
 end
@@ -150,27 +129,9 @@ def volume_compatible_with_resource_definition?(volume)
 end
 
 # Creates a volume according to specifications and blocks until done (or times out)
-def create_volume(snapshot_id, size, availability_zone, timeout, volume_type, piops)
+def create_volume(snapshot_id, size, availability_zone, timeout)
   availability_zone ||= instance_availability_zone
-
-  # Sanity checks so we don't shoot ourselves.
-  raise "Invalid volume type: #{volume_type}" unless ['standard', 'io1'].include?(volume_type)
-
-  # PIOPs requested. Must specify an iops param and probably won't be "low".
-  if volume_type == 'io1'
-    raise 'IOPS value not specified.' unless piops > 100
-  end
-
-  # Shouldn't see non-zero piops param without appropriate type.
-  if piops > 0
-    raise 'IOPS param without piops volume type.' unless volume_type == 'io1'
-  end
-
-  create_volume_opts = { :volume_type => volume_type }
-  # TODO: this may have to be casted to a string.  rightaws vs aws doc discrepancy.
-  create_volume_opts[:iops] = piops if volume_type == 'io1'
-
-  nv = ec2.create_volume(snapshot_id, size, availability_zone, create_volume_opts)
+  nv = ec2.create_volume(snapshot_id, size, availability_zone)
   Chef::Log.debug("Created new volume #{nv[:aws_id]}#{snapshot_id ? " based on #{snapshot_id}" : ""}")
 
   # block until created
@@ -260,5 +221,3 @@ def detach_volume(volume_id, timeout)
     raise "Timed out waiting for volume detachment after #{timeout} seconds"
   end
 end
-
-
