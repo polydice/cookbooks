@@ -34,5 +34,8 @@ def elb
 
   # TODO: Fix RightAWS bug
   @@elb.params[:server] = "elasticloadbalancing.ap-northeast-1.amazonaws.com"
+  @@elb.params[:host_to_sign]  = @@elb.params[:server]
+
+  @@elb
 end
 
