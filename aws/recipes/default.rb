@@ -17,9 +17,13 @@
 # limitations under the License.
 #
 
-chef_gem "right_aws" do
+r = gem_package "right_aws" do
   version node['aws']['right_aws_version']
-  action :install
+  action :nothing
 end
 
+r.run_action(:install)
+
+require 'rubygems'
+Gem.clear_paths
 require 'right_aws'
