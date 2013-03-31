@@ -16,3 +16,5 @@ node[:deploy].each do |application, deploy|
     end
   end
 end
+
+include_recipe "deploy::rails-restart"
