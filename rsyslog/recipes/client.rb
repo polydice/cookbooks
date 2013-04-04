@@ -45,6 +45,6 @@ elsif !node['rsyslog']['server']
 
   file "/etc/rsyslog.d/server.conf" do
     action :delete
-    notifies :restart, resources(:service => node['rsyslog']['service_name'])
+    notifies :reload, resources(:service => node['rsyslog']['service_name'])
   end
 end

@@ -44,6 +44,6 @@ end
 file "/etc/rsyslog.d/remote.conf" do
   action :delete
   backup false
-  notifies :restart, resources(:service => node['rsyslog']['service_name'])
+  notifies :reload, resources(:service => node['rsyslog']['service_name'])
   only_if do ::File.exists?("/etc/rsyslog.d/remote.conf") end
 end
