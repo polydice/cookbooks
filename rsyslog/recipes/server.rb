@@ -38,12 +38,12 @@ template "/etc/rsyslog.d/35-server-per-host.conf" do
   owner node["rsyslog"]["user"]
   group node["rsyslog"]["group"]
   mode 0644
-  notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+  notifies :restart, resources(:service => node['rsyslog']['service_name'])
 end
 
 file "/etc/rsyslog.d/remote.conf" do
   action :delete
   backup false
-  notifies :reload, "service[#{node['rsyslog']['service_name']}]"
+  notifies :restart, resources(:service => node['rsyslog']['service_name'])
   only_if do ::File.exists?("/etc/rsyslog.d/remote.conf") end
 end

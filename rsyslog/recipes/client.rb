@@ -40,11 +40,11 @@ elsif !node['rsyslog']['server']
     owner node["rsyslog"]["user"]
     group node["rsyslog"]["group"]
     mode 0644
-    notifies :restart, "service[#{node['rsyslog']['service_name']}]"
+    notifies :restart, resources(:service => node['rsyslog']['service_name'])
   end
 
   file "/etc/rsyslog.d/server.conf" do
     action :delete
-    notifies :reload, "service[#{node['rsyslog']['service_name']}]"
+    notifies :restart, resources(:service => node['rsyslog']['service_name'])
   end
 end
