@@ -10,6 +10,8 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
+  elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][:elasticsearch1][:private_ip]
+
   template "#{deploy[:deploy_to]}/shared/config/application.yml" do
   source "application.yml.erb"
   mode 0755
@@ -20,7 +22,7 @@ node[:deploy].each do |application, deploy|
     "facebook" => node[:facebook],
     "fog" => node[:fog],
     "sendy" => node[:sendy],
-    "elasticsearch" => node[:elasticsearch]
+    "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host})
   )
   end
 
