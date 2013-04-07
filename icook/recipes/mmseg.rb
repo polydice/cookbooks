@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-src_filepath = "#{Chef::Config['file_cache_path']}/mmseg.tar.gz"
+src_filepath = "/tmp/mmseg.tar.gz"
 extract_path = "#{node.elasticsearch[:path][:conf]}/mmseg"
 
 remote_file src_filepath do
