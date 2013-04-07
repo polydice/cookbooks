@@ -9,7 +9,7 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 
 * [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: c0bbe9)
 * [bryanwb/chef-ark](https://github.com/bryanwb/chef-ark) (commit: 991613)
-* [cgriego/chef-scout](https://github.com/cgriego/chef-scout) (commit: 872399)
+* [scoutapp/scout_cookbooks](https://github.com/scoutapp/scout_cookbooks) (commit: ea5fb0)
 * [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: 1bede8)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
 * [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
