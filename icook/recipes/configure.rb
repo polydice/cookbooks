@@ -52,7 +52,7 @@ node[:deploy].each do |application, deploy|
       group deploy[:group]
       owner deploy[:user]
       variables(
-        "scout" => node[:scout]
+        "scout" => node[:scout_rails]
       )
   end
 end
