@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "nginx::service"
+
 node[:deploy].each do |application, deploy|
   ruby_block "insert_client_max_body_size_line" do
     block do
@@ -15,8 +17,7 @@ node[:deploy].each do |application, deploy|
       file.insert_line_after_match("keepalive_timeout", "  client_max_body_size 32m;")
       file.write_file
     end
+
+    notifies :reload, resources(:service => 'nginx')
   end
 end
-
-include_recipe "nginx::service"
-notifies :reload, resources(:service => 'nginx')
