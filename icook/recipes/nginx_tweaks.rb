@@ -8,10 +8,9 @@
 #
 
 node[:deploy].each do |application, deploy|
-  template "#{node[:nginx][:dir]}/sites-available/#{application}" do
-    ruby_block "insert_client_max_body_size_line" do
+  ruby_block "insert_client_max_body_size_line" do
     block do
-      file = Chef::Util::FileEdit.new("#{deploy[:deploy_to]}/shared/config/unicorn.conf")
+      file = Chef::Util::FileEdit.new("#{node[:nginx][:dir]}/sites-available/#{application}")
       file.search_file_delete_line("client_max_body_size")
       file.insert_line_after_match("keepalive_timeout", "  client_max_body_size 32m;")
       file.write_file
