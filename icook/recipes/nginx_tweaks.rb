@@ -19,5 +19,7 @@ node[:deploy].each do |application, deploy|
     end
 
     notifies :reload, resources(:service => 'nginx')
+
+    only_if do File.exist?("#{node[:nginx][:dir]}/sites-available/#{application}") end
   end
 end
