@@ -15,7 +15,7 @@ defaults: &defaults
     url: "<%= @sendy[:url] %>"
     list_id: "<%= @sendy[:list_id] %>"
   tire:
-    url: "http://<%= @elasticsearch[:host] %>:<%= @elasticsearch[:port] %>"
+    url: "http://<%= @elasticsearch[:host] %>:9200"
 
 development:
   <<: *defaults
