@@ -7,7 +7,13 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 
 ## Polydice Cookbooks
 
-* iCook - For everything we need for iCook stack. 
+* iCook - For everything we need for iCook stack.
+
+## OpsWorks Official Cookbooks
+
+These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for modification.
+
+* nginx (comit: 00af6e)
 
 ## 3rd Party Cookbooks
 
