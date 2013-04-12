@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 
-node[:deploy].each do |applicationlication, deploy|
+node[:deploy].each do |application, deploy|
   template "/etc/monit.d/sidekiq_#{applicationlication}.monitrc" do
     owner 'root'
     group 'root'
