@@ -1,5 +1,5 @@
 check process sidekiq_<%= @app_name %>
   with pidfile <%= deploy[:deploy_to] %>/shared/pids/sidekiq_<%= @app_name %>.pid
-  start program = "/etc/init.d/sidekiq <%= @app_name %> start <%= deploy[:rails_env]  %> <%= deploy[:deploy_to]/current/config/sidekiq.yml %>" with timeout 90 seconds
-  stop program = "/etc/init.d/sidekiq <%= @app_name %> stop <%= deploy[:rails_env]  %> <%= deploy[:deploy_to]/current/config/sidekiq.yml" with timeout 180 seconds
+  start program = "/etc/init.d/sidekiq <%= @app_name %> start <%= @deploy[:rails_env]  %> <%= @deploy[:deploy_to]/current/config/sidekiq.yml %>" with timeout 90 seconds
+  stop program = "/etc/init.d/sidekiq <%= @app_name %> stop <%= @deploy[:rails_env]  %> <%= @deploy[:deploy_to]/current/config/sidekiq.yml" with timeout 180 seconds
   if totalmem is greater than 300 MB for 2 cycles then restart # eating up memory?
