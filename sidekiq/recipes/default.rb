@@ -4,7 +4,7 @@
 #
 
 node[:deploy].each do |application, deploy|
-  template "/etc/monit.d/sidekiq_#{application}.monitrc" do
+  template "#{node[:monit][:conf_dir]}/sidekiq_#{application}.monitrc" do
     owner 'root'
     group 'root'
     mode 0644
