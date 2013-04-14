@@ -15,13 +15,6 @@ node[:deploy].each do |application, deploy|
     })
   end
 
-  template "/etc/init.d/sidekiq" do
-    owner 'root'
-    group 'root'
-    mode 0755
-    source "sidekiq.erb"
-  end
-
   execute "ensure-sidekiq-is-setup-with-monit" do
     command %Q{
       monit reload
