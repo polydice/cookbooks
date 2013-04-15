@@ -11,6 +11,10 @@ defaults: &defaults
     app_access_token: "<%= @facebook[:app_access_token] %>"
   fog:
     directory: "<%= @fog[:directory] %>"
+  papertrail:
+    host: "<%= @papertrail[:remote_host] %>"
+    port: "<%= @papertrail[:remote_port] %>"
+
   sendy:
     url: "<%= @sendy[:url] %>"
     list_id: "<%= @sendy[:list_id] %>"

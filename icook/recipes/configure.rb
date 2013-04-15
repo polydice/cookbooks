@@ -22,6 +22,7 @@ node[:deploy].each do |application, deploy|
     "facebook" => node[:facebook],
     "fog" => node[:fog],
     "sendy" => node[:sendy],
+    "papertrail" => node[:papertrail],
     "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host})
   )
   end
