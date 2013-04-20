@@ -7,5 +7,5 @@
   username: <%= @database[:username] %>
   password: <%= @database[:password] %>
   reconnect: <%= @database[:reconnect] ? 'true' : 'false' %>
-
+  pool: <%= @database[:pool] || 5 %>
 <% end -%>
