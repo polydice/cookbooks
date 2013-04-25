@@ -10,7 +10,7 @@ node[:deploy].each do |application, deploy|
     mode 0644
     source "monitrc.conf.erb"
     variables({
-      :application_name => application,
+      :app_name => application,
       :deploy => deploy
     })
   end
@@ -21,7 +21,7 @@ node[:deploy].each do |application, deploy|
     mode 0644
     source "web_monitrc.conf.erb"
     variables({
-      :application_name => application,
+      :app_name => application,
       :deploy => deploy
     })
   end
@@ -32,7 +32,7 @@ node[:deploy].each do |application, deploy|
     mode 0644
     source "clockworkd_monitrc.conf.erb"
     variables({
-      :application_name => application,
+      :app_name => application,
       :deploy => deploy
     })
   end
