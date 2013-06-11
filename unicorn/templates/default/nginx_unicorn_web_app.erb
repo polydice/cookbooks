@@ -7,6 +7,8 @@ server {
   server_name <%= @application[:domains].join(" ") %> <%= node[:hostname] %>;
   access_log <%= node[:nginx][:log_dir] %>/<%= @application[:domains].first %>.access.log;
 
+  server_tokens off;
+
   keepalive_timeout 5;
 
   root <%= @application[:absolute_document_root] %>;
@@ -35,6 +37,12 @@ server {
     deny all;
   }
 
+  location /api/v1 {
+    if ($http_user_agent !~* ^tw.icook(.*)){
+      return 403;
+    }
+  }
+
   error_page 500 502 503 504 /500.html;
   location = /500.html {
     root <%= @application[:absolute_document_root] %>;
@@ -46,6 +54,8 @@ server {
   listen   443;
   server_name <%= @application[:domains].join(" ") %> <%= node[:hostname] %>;
   access_log <%= node[:nginx][:log_dir] %>/<%= @application[:domains].first %>-ssl.access.log;
+
+  server_tokens off;
 
   ssl on;
   ssl_certificate /etc/nginx/ssl/<%= @application[:domains].first %>.crt;
@@ -73,6 +83,12 @@ server {
     if (!-f $request_filename) {
       proxy_pass http://unicorn_<%= @application[:domains].first %>;
       break;
+    }
+  }
+
+  location /api/v1 {
+    if ($http_user_agent !~* ^tw.icook(.*)){
+      return 403;
     }
   }
 
