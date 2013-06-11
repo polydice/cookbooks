@@ -9,3 +9,14 @@
   reconnect: <%= @database[:reconnect] ? 'true' : 'false' %>
   pool: <%= @database[:pool] || 5 %>
 <% end -%>
+<% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
+<%= "base_database_#{env}" %>:
+  adapter: <%= @legacy[:adapter] %>
+  database: <%= @legacy[:database] %>
+  encoding: utf8
+  host: <%= @legacy[:host] || 'localhost' %>
+  username: <%= @legacy[:username] %>
+  password: <%= @legacy[:password] %>
+  reconnect: <%= @legacy[:reconnect] ? 'true' : 'false' %>
+  pool: <%= @legacy[:pool] || 5 %>
+<% end unless @legacy.nil? -%>
