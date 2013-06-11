@@ -1,0 +1,11 @@
+<% (['development', 'production'] + [@environment]).uniq.each do |env| -%>
+<%= "base_database_#{env}" %>:
+  adapter: <%= @legacy_database[:adapter] %>
+  database: <%= @legacy_database[:database] %>
+  encoding: utf8
+  host: <%= @legacy_database[:host] || 'localhost' %>
+  username: <%= @legacy_database[:username] %>
+  password: <%= @legacy_database[:password] %>
+  reconnect: <%= @legacy_database[:reconnect] ? 'true' : 'false' %>
+  pool: <%= @legacy_database[:pool] || 5 %>
+<% end -%>
