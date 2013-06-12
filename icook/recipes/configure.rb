@@ -10,7 +10,11 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
-  elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][:elasticsearch1][:private_ip]
+  begin
+    elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][:elasticsearch1][:private_ip]
+  rescue Exception => e
+    elasticsearch_host = nil
+  end
 
   template "#{deploy[:deploy_to]}/shared/config/application.yml" do
   source "application.yml.erb"
