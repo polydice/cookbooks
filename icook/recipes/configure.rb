@@ -17,33 +17,40 @@ node[:deploy].each do |application, deploy|
   end
 
   template "#{deploy[:deploy_to]}/shared/config/application.yml" do
-  source "application.yml.erb"
-  mode 0755
-  group deploy[:group]
-  owner deploy[:user]
-  variables(
-    "aws" => node[:aws],
-    "facebook" => node[:facebook],
-    "fog" => node[:fog],
-    "sendy" => node[:sendy],
-    "papertrail" => node[:papertrail],
-    "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host})
-  )
-  end
-
-  host = node[:opsworks][:layers][:redis][:instances][:redis1][:private_ip]
-
-  template "#{deploy[:deploy_to]}/shared/config/redis.yml" do
-    source "redis.yml.erb"
+    source "application.yml.erb"
     mode 0755
     group deploy[:group]
     owner deploy[:user]
     variables(
-      "host" => host
+      "aws" => node[:aws],
+      "facebook" => node[:facebook],
+      "fog" => node[:fog],
+      "sendy" => node[:sendy],
+      "papertrail" => node[:papertrail],
+      "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host})
     )
   end
 
-  template "#{deploy[:deploy_to]}/shared/config/librato.yml" do
+  begin
+    redis_host = node[:opsworks][:layers][:redis][:instances][:redis1][:private_ip]
+  rescue Exception => e
+    redis_host = nil
+  end
+
+  if redis_host
+    template "#{deploy[:deploy_to]}/shared/config/redis.yml" do
+      source "redis.yml.erb"
+      mode 0755
+      group deploy[:group]
+      owner deploy[:user]
+      variables(
+        "host" => redis_host
+      )
+    end
+  end
+
+  if node[:librato]
+    template "#{deploy[:deploy_to]}/shared/config/librato.yml" do
       source "librato.yml.erb"
       mode 0755
       group deploy[:group]
@@ -51,9 +58,11 @@ node[:deploy].each do |application, deploy|
       variables(
         "librato" => node[:librato]
       )
+    end
   end
 
-  template "#{deploy[:deploy_to]}/shared/config/scout_rails.yml" do
+  if node[:scout_rails]
+    template "#{deploy[:deploy_to]}/shared/config/scout_rails.yml" do
       source "scout_rails.yml.erb"
       mode 0755
       group deploy[:group]
@@ -61,5 +70,6 @@ node[:deploy].each do |application, deploy|
       variables(
         "scout_rails" => node[:scout_rails]
       )
+    end
   end
 end
