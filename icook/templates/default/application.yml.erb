@@ -1,24 +1,36 @@
 # config/application.yml
 defaults: &defaults
+  <% if @aws do %>
   aws:
     access_key_id: "<%= @aws[:access_key_id] %>"
     secret_access_key: "<%= @aws[:secret_access_key] %>"
     region: "<%= @aws[:region] %>"
+  <% end %>
+  <% if @facebook do %>
   facebook:
     domain: "<%= @facebook[:domain] %>"
     api_key: "<%= @facebook[:api_key] %>"
     api_secret: "<%= @facebook[:api_secret] %>"
     app_access_token: "<%= @facebook[:app_access_token] %>"
+  <% end %>
+  <% if @fog do %>
   fog:
     directory: "<%= @fog[:directory] %>"
+  <% end %>
+  <% if @papertrail do %>
   papertrail:
     host: "<%= @papertrail[:remote_host] %>"
     port: "<%= @papertrail[:remote_port] %>"
+  <% end %>
+  <% if @sendy do %>
   sendy:
     url: "<%= @sendy[:url] %>"
     list_id: "<%= @sendy[:list_id] %>"
+  <% end %>
+  <% if @elasticsearch do %>
   tire:
     url: "http://<%= @elasticsearch[:host] %>:9200"
+  <% end %>
 
 development:
   <<: *defaults
