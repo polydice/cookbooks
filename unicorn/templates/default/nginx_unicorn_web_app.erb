@@ -27,7 +27,7 @@ server {
       set $block_rules API;
     }
 
-    if ($http_user_agent !~* ^tw.icook(.*)) {
+    if ($http_user_agent !~* ^(com\.(the)?polydice\.icook|tw\.icook\.)) {
       set $block_rules "${block_rules}BADAGENT";
     }
 
