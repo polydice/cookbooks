@@ -31,6 +31,17 @@ defaults: &defaults
   tire:
     url: "http://<%= @elasticsearch[:host] %>:9200"
   <% end %>
+  <% if @pusher %>
+  pusher:
+    app_id: "<%= @pusher[:app_id] %>"
+    key: "<%= @pusher[:key] %>"
+    secret: "<%= @pusher[:secret] %>"
+    url: "<%= @pusher[:url] %>"
+  <% end %>
+  <% if @legacy %>
+  legacy:
+  	secret_token: "<%= legacy[:secret_token] %>"
+  <% end %>
 
 development:
   <<: *defaults

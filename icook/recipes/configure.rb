@@ -27,7 +27,9 @@ node[:deploy].each do |application, deploy|
       "fog" => node[:fog],
       "sendy" => node[:sendy],
       "papertrail" => node[:papertrail],
-      "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host})
+      "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host}),
+      "legacy" => node[:legacy],
+      "pusher" => node[:pusher]
     )
   end
 
