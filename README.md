@@ -26,6 +26,7 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
 * [jtimberman/mosh-cookbook](https://github.com/jtimberman/mosh-cookbook) (commit: be9079d)
 * [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
+* [onehealth-cookbooks/sysctl](https://github.com/onehealth-cookbooks/sysctl) (commit: 494290)
 * [opscode-cookbooks/apt](https://github.com/opscode-cookbooks/apt) (commit: 302857)
 * [opscode-cookbooks/aws](https://github.com/opscode-cookbooks/aws) (commit: ebe94d)
 * [opscode-cookbooks/imagemagick](https://github.com/opscode-cookbooks/imagemagick) (commit: 20aec2)
