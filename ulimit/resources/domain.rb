@@ -3,10 +3,10 @@ attr_reader :subresource_rules
 def initialize(*args)
   @subresource_rules = []
   super
+  @action = :create
 end
 
 actions :create, :delete
-default_action :create
 
 attribute :domain_name, :kind_of => String, :name_attribute => true
 attribute :filename, :kind_of => String
