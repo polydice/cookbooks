@@ -26,7 +26,7 @@ if(sysctl_path)
     action :nothing
     source 'sysctl.conf.erb'
     mode '0644'
-    notifies :start, "service[procps]", :immediately
+    notifies :start, resources(:service => "procps"), :immediately
     only_if do
       node['sysctl']['params'] && !node['sysctl']['params'].empty?
     end
@@ -36,6 +36,6 @@ if(sysctl_path)
     block do
       true
     end
-    notifies :create, "template[#{sysctl_path}]", :delayed
+    notifies :create, resources(:template => sysctl_path), :delayed
   end
 end
