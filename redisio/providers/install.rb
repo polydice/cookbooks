@@ -38,9 +38,10 @@ def download
 end
 
 def unpack
+  install_dir = "#{new_resource.base_name}#{new_resource.version}"
   case new_resource.artifact_type
     when "tar.gz",".tgz"
-      execute "cd #{new_resource.download_dir} && tar zxf #{@tarball}"
+      execute %(cd #{new_resource.download_dir} ; mkdir -p '#{install_dir}' ; tar zxf '#{@tarball}' --strip-components=1 -C '#{install_dir}')
     else
       raise Chef::Exceptions::UnsupportedAction, "Current package type #{new_resource.artifact_type} is unsupported"
   end
@@ -51,7 +52,9 @@ def build
 end
 
 def install
-  execute "cd #{new_resource.download_dir}/#{new_resource.base_name}#{new_resource.version} && make install"
+  install_prefix = ""
+  install_prefix = "PREFIX=#{new_resource.install_dir}" if new_resource.install_dir
+  execute "cd #{new_resource.download_dir}/#{new_resource.base_name}#{new_resource.version} && make #{install_prefix} install"
   new_resource.updated_by_last_action(true)
 end
 
@@ -74,19 +77,21 @@ def configure
     node_memory_kb.slice! "kB"
     node_memory_kb = node_memory_kb.to_i
 
-    maxmemory = current['maxmemory']
-    if current['maxmemory'] && current['maxmemory'].include?("%")
+    maxmemory = "#{current['maxmemory']}"
+    if !maxmemory.empty? && maxmemory.include?("%")
       # Just assume this is sensible like "95%" or "95 %"
       percent_factor = current['maxmemory'].to_f / 100.0
       # Ohai reports memory in KB as it looks in /proc/meminfo
-      maxmemory = (node_memory_kb * 1024 * percent_factor / new_resource.servers.length).to_i
+      maxmemory = (node_memory_kb * 1024 * percent_factor / new_resource.servers.length).to_s
     end
+
+    descriptors = current['ulimit'] == 0 ? current['maxclients'] + 32 : current['maxclients']
 
     recipe_eval do
       server_name = current['name'] || current['port']
       piddir = "#{base_piddir}/#{server_name}"
       aof_file = "#{current['datadir']}/appendonly-#{server_name}.aof"
-      rdb_file = "#{current['datadir']}/dump-#{server_name}.rdb"  
+      rdb_file = "#{current['datadir']}/dump-#{server_name}.rdb"
 
       #Create the owner of the redis data directory
       user current['user'] do
@@ -130,7 +135,7 @@ def configure
         only_if { current['syslogenabled'] != 'yes' && current['logfile'] && current['logfile'] != 'stdout' }
       end
       #Create the log file is syslog is not being used
-      file current['logfile'] do 
+      file current['logfile'] do
         owner current['user']
         group current['group']
         mode '0644'
@@ -139,7 +144,7 @@ def configure
         only_if { current['logfile'] && current['logfile'] != 'stdout' }
       end
       #Set proper permissions on the AOF or RDB files
-      file aof_file do 
+      file aof_file do
         owner current['user']
         group current['group']
         mode '0644'
@@ -153,6 +158,12 @@ def configure
         only_if { current['backuptype'] == 'rdb' || current['backuptype'] == 'both' }
         only_if { ::File.exists?(rdb_file) }
       end
+      #Setup the redis users descriptor limits
+      if current['ulimit']
+        user_ulimit current['user'] do
+          filehandle_limit descriptors
+        end
+      end
       #Lay down the configuration files for the current instance
       template "#{current['configdir']}/#{server_name}.conf" do
         source 'redis.conf.erb'
@@ -164,6 +175,7 @@ def configure
           :version                => version_hash,
           :piddir                 => piddir,
           :name                   => server_name,
+          :job_control            => current['job_control'],
           :port                   => current['port'],
           :address                => current['address'],
           :databases              => current['databases'],
@@ -179,7 +191,7 @@ def configure
           :save                   => current['save'],
           :slaveof                => current['slaveof'],
           :masterauth             => current['masterauth'],
-          :slaveservestaledata    => current['slaveservestaledata'], 
+          :slaveservestaledata    => current['slaveservestaledata'],
           :replpingslaveperiod    => current['replpingslaveperiod'],
           :repltimeout            => current['repltimeout'],
           :requirepass            => current['requirepass'],
@@ -191,10 +203,15 @@ def configure
           :noappendfsynconrewrite => current['noappendfsynconrewrite'],
           :aofrewritepercentage   => current['aofrewritepercentage'] ,
           :aofrewriteminsize      => current['aofrewriteminsize'],
+          :clusterenabled         => current['cluster-enabled'],
+          :clusterconfigfile      => current['cluster-config-file'],
+          :clusternodetimeout     => current['cluster-node-timeout'],
           :includes               => current['includes']
         })
       end
       #Setup init.d file
+      bin_path = "/usr/local/bin"
+      bin_path = ::File.join(node['redisio']['install_dir'], 'bin') if node['redisio']['install_dir']
       template "/etc/init.d/redis#{server_name}" do
         source 'redis.init.erb'
         cookbook 'redisio'
@@ -203,6 +220,8 @@ def configure
         mode '0755'
         variables({
           :name => server_name,
+          :bin_path => bin_path,
+          :job_control => current['job_control'],
           :port => current['port'],
           :address => current['address'],
           :user => current['user'],
@@ -211,7 +230,8 @@ def configure
           :requirepass => current['requirepass'],
           :shutdown_save => current['shutdown_save'],
           :platform => node['platform'],
-          :unixsocket => current['unixsocket']
+          :unixsocket => current['unixsocket'],
+          :ulimit => descriptors
           })
         only_if { current['job_control'] == 'initd' }
       end
@@ -223,6 +243,7 @@ def configure
         mode '0644'
         variables({
           :name => server_name,
+          :job_control => current['job_control'],
           :port => current['port'],
           :address => current['address'],
           :user => current['user'],
@@ -232,6 +253,7 @@ def configure
           :shutdown_save => current['shutdown_save'],
           :save => current['save'],
           :configdir => current['configdir'],
+          :piddir => piddir,
           :platform => node['platform'],
           :unixsocket => current['unixsocket']
         })
@@ -242,14 +264,18 @@ def configure
 end
 
 def redis_exists?
-  exists = Chef::ShellOut.new("which redis-server")
-  exists.run_command
-  exists.exitstatus == 0 ? true : false 
+  bin_path = "/usr/local/bin"
+  bin_path = ::File.join(node['redisio']['install_dir'], 'bin') if node['redisio']['install_dir']
+  redis_server = ::File.join(bin_path, 'redis-server')
+  ::File.exists?(redis_server)
 end
 
 def version
   if redis_exists?
-    redis_version = Chef::ShellOut.new("redis-server -v")
+    bin_path = "/usr/local/bin"
+    bin_path = ::File.join(node['redisio']['install_dir'], 'bin') if node['redisio']['install_dir']
+    redis_server = ::File.join(bin_path, 'redis-server')
+    redis_version = Mixlib::ShellOut.new("#{redis_server} -v")
     redis_version.run_command
     version = redis_version.stdout[/version (\d*.\d*.\d*)/,1] || redis_version.stdout[/v=(\d*.\d*.\d*)/,1]
     Chef::Log.info("The Redis server version is: #{version}")

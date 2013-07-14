@@ -9,6 +9,7 @@ Requirements
 ============
 
 This cookbook builds redis from source, so it should work on any architecture for the supported distributions.  Init scripts are installed into /etc/init.d/
+It depends on the ulimit cookbook: https://github.com/bmhatfield/chef-ulimit
 
 Platforms
 ---------
@@ -227,15 +228,19 @@ The service resources created will use the 'name' attribute if it is specified, 
 
 Using the service resources:
 
+```ruby
 service "redis6379" do
   action :start
 end
+```
 
 Or if you have named your server "Master"
 
+```ruby
 service "redisMaster" do
   action :start
 end
+```
 
 Attributes
 ==========
@@ -245,10 +250,12 @@ Configuration options, each option corresponds to the same-named configuration o
 * `redisio['mirror']` - mirror server with path to download redis package, default is https://redis.googlecode.com/files
 * `redisio['base_name']` - the base name of the redis package to be downloaded (the part before the version), default is 'redis-'
 * `redisio['artifact_type']` - the file extension of the package.  currently only .tar.gz and .tgz are supported, default is 'tar.gz'
-* `redisio['version']` - the version number of redis to install (also appended to the `base_name` for downloading), default is '2.4.10'
+* `redisio['version']` - the version number of redis to install (also appended to the `base_name` for downloading), default is '2.6.10'
 * `redisio['safe_install'] - prevents redis from installing itself if another version of redis is installed, default is true
 * `redisio['base_piddir'] - This is the directory that redis pidfile directories and pidfiles will be placed in.  Since redis can run as non root, it needs to have proper
                            permissions to the directory to create its pid.  Since each instance can run as a different user, these directories will all be nested inside this base one.
+* `redisio['install_dir'] - This is the directory that redis will install its binaries.  Defaults to nil which uses the redis default (/usr/local/bin)
+
 
 Default settings is a hash of default settings to be applied to to ALL instances.  These can be overridden for each individual server in the servers attribute.  If you are going to set logfile to a specific file, make sure to set syslog-enabled to no.
 
@@ -262,6 +269,7 @@ Available options and their defaults
 'homedir'                => Home directory of the user. Varies on distribution, check attributes file 
 'shell'                  => Users shell. Varies on distribution, check attributes file
 'systemuser'             => true - Sets up the instances user as a system user
+'ulimit'                 => 0 - 0 is a special value causing the ulimit to be maxconnections +32.  Set to nil or false to disable setting ulimits
 'configdir'              => '/etc/redis' - configuration directory
 'name'                   => nil, Allows you to name the server with something other than port.  Useful if you want to use unix sockets
 'address'                => nil,
@@ -291,6 +299,9 @@ Available options and their defaults
 'noappendfsynconrewrite' => 'no',
 'aofrewritepercentage'   => '100',
 'aofrewriteminsize'      => '64mb',
+'cluster-enabled'        => 'no',
+'cluster-config-file'    => nil, # Defaults to redis instance name inside of template if cluster is enabled.
+'cluster-node-timeout'   => 5,
 'includes'               => nil
 ```
 
@@ -305,6 +316,25 @@ Resources/Providers
 ===================
 
 This cookbook contains 2 LWRP's, and service resources for each instance of redis.
+
+`service`
+---------
+
+Actions:
+
+* `start`
+* `stop`
+* `restart`
+* `enable`
+* `disable`
+
+Simply provide redis<server_name> where server name is the port if you haven't given it a name.
+
+```ruby
+service "redis<server_name>" do
+  action [:start,:stop,:restart,:enable,:disable]
+end
+```
 
 `install`
 --------
@@ -358,32 +388,13 @@ uninstall "redis" do
 end
 ```
 
-`service`
----------
-
-Actions:
-
-* `start`
-* `stop`
-* `restart`
-* `enable`
-* `disable`
-
-Simply provide redis<server_name> where server name is the port if you haven't given it a name.
-
-```ruby
-service "redis<server_name>" do
-  action [:start,:stop,:restart,:enable,:disable]
-end
-```
-
 License and Author
 ==================
 
 Author:: [Brian Bianco] (<brian.bianco@gmail.com>)
 Author\_Website:: http://www.brianbianco.com
 Twitter:: @brianwbianco
-IRC:: geekbri
+IRC:: geekbri on freenode
 
 Copyright 2013, Brian Bianco
 

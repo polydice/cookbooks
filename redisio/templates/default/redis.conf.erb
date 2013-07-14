@@ -14,7 +14,9 @@
 
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+<% unless @job_control == 'upstart' %> 
 daemonize yes
+<% end %>
 
 # When running daemonized, Redis writes a pid file in /var/run/redis.pid by
 # default. You can specify a custom pid file location here.
@@ -236,7 +238,7 @@ repl-timeout <%=@repltimeout%>
 # output buffers (but this is not needed if the policy is 'noeviction').
 #
 #maxmemory <bytes>
-<%= "maxmemory #{@maxmemory}" unless @maxmemory.nil? %>
+<%= "maxmemory #{@maxmemory}" unless @maxmemory.empty? %>
 
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:
@@ -518,6 +520,12 @@ zset-max-ziplist-value 64
 # use "activerehashing yes" if you don't have such hard requirements but
 # want to free memory asap when possible.
 activerehashing yes
+
+<%if @clusterenabled == 'yes' %>
+cluster-enabled yes
+cluster-config-file <%= @clusterconfigfile || "nodes-#{@name}.conf" %>
+cluster-node-timeout <%= @clusternodetimeout %>
+<%end%>
 
 ################################## INCLUDES ###################################
 

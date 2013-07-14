@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 include_recipe 'redisio::default'
+include_recipe 'ulimit::default'
 
 redis = node['redisio']
 location = "#{redis['mirror']}/#{redis['base_name']}#{redis['version']}.#{redis['artifact_type']}"
@@ -33,6 +34,7 @@ redisio_install "redis-servers" do
   servers redis_instances
   safe_install redis['safe_install']
   base_piddir redis['base_piddir']
+  install_dir redis['install_dir']
 end
 
 # Create a service resource for each redis instance, named for the port it runs on.
