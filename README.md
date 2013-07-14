@@ -18,7 +18,7 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 
 ## 3rd Party Cookbooks
 
-* [bmhatfield/chef-ulimit](https://github.com/bmhatfield/chef-ulimit) (commit: 2d5943)
+* [bmhatfield/chef-ulimit](https://github.com/bmhatfield/chef-ulimit) (commit: 588870)
 * [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: 944f92)
 * [bryanwb/chef-ark](https://github.com/bryanwb/chef-ark) (commit: 991613)
 * [scoutapp/scout_cookbooks](https://github.com/scoutapp/scout_cookbooks) (commit: ea5fb0)

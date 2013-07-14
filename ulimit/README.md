@@ -20,47 +20,26 @@ Usage
 =====
 
 Consume the user_ulimit resource like so:
-```ruby
-user_ulimit "tomcat" do
-  filehandle_limit 8192 # optional
-  process_limit 61504 # optional
-  memory_limit 1024 # optional
-  core_limit 2048 # optional
-end
-```
+
+    user_ulimit "tomcat" do
+      filehandle_limit 8192 # optional
+      process_limit 61504 # optional
+      memory_limit 1024 # optional
+      core_limit 2048 # optional
+    end
 
 You can also define limits using attributes on roles or nodes:
 
-```
-"default_attributes": {
-   "ulimit": {
-      "users": {
-         "tomcat": {
-            "filehandle_limit": 8193,
-               "process_limit": 61504
-             },
-            "hbase": {
-               "filehandle_limit": 32768
-             }
-       }
+    "default_attributes": {
+        "ulimit": {
+            "users": {
+                "tomcat": {
+                    "filehandle_limit": 8193,
+                    "process_limit": 61504
+                },
+                "hbase": {
+                    "filehandle_limit": 32768
+                }
+            }
+        }
     }
- }
- ```
-
-Domain LWRP
-===========
-
-```ruby
-ulimit_domain 'my_user' do
-  rule do
-    item :nofile
-    type :hard
-    value 10000
-  end
-  rule do
-    item :nofile
-    type :soft
-    value 5000
-  end
-end
-```
