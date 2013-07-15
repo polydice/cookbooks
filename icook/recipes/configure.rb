@@ -34,7 +34,8 @@ node[:deploy].each do |application, deploy|
   end
 
   begin
-    redis_host = node[:opsworks][:layers][:redis][:instances][:redis1][:private_ip]
+    redis_instance = node[:opsworks][:layers][:redis][:instances].keys.last
+    redis_host = node[:opsworks][:layers][:redis][:instances][redis_instance][:private_ip]
   rescue Exception => e
     redis_host = nil
   end
