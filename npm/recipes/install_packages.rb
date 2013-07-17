@@ -1,9 +1,10 @@
 #
 # Cookbook Name:: npm
+# Recipe:: install_packages
 #
-# Author:: Sergey Balbeko <sergey@balbeko.com>
+# Author:: Richard Lee <dlackty@gmail.com>
 #
-# Copyright 2012, Sergey Balbeko
+# Copyright 2013, Richard Lee
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,5 +19,8 @@
 # limitations under the License.
 #
 
-default['npm']['version'] = '1.2.14'
-default['npm']['packages'] = []
+include_recipe "nodejs"
+
+node["npm"]["packages"].each do |package|
+  npm_package package
+end
