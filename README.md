@@ -18,6 +18,7 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 
 ## 3rd Party Cookbooks
 
+* [balbeko/chef-npm](https://github.com/balbeko/chef-npm) (commit:b1b48f)
 * [bmhatfield/chef-ulimit](https://github.com/bmhatfield/chef-ulimit) (commit: 588870)
 * [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: 944f92)
 * [bryanwb/chef-ark](https://github.com/bryanwb/chef-ark) (commit: 991613)
