@@ -14,7 +14,7 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for modification.
 
 * nginx (commit: 00af6e)
-* rails (commit: 27e083)
+* rails (commit: df634d)
 
 ## 3rd Party Cookbooks
 

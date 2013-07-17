@@ -17,7 +17,6 @@ node[:deploy].each do |application, deploy|
     mode "0660"
     group deploy[:group]
     owner deploy[:user]
-
     variables(:database => deploy[:database], :environment => deploy[:rails_env])
 
     notifies :run, resources(:execute => "restart Rails app #{application}")
@@ -33,7 +32,10 @@ node[:deploy].each do |application, deploy|
     mode "0660"
     group deploy[:group]
     owner deploy[:user]
-    variables(:memcached => deploy[:memcached], :environment => deploy[:rails_env])
+    variables(
+      :memcached => deploy[:memcached] || {},
+      :environment => deploy[:rails_env]
+    )
 
     notifies :run, resources(:execute => "restart Rails app #{application}")
 
