@@ -28,6 +28,7 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 * [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
 * [onehealth-cookbooks/sysctl](https://github.com/onehealth-cookbooks/sysctl) (commit: 494290)
 * [opscode-cookbooks/apt](https://github.com/opscode-cookbooks/apt) (commit: 302857)
+* [opscode-cookbooks/build-essential](https://github.com/opscode-cookbooks/build-essential) (commit: 31d74e)
 * [opscode-cookbooks/imagemagick](https://github.com/opscode-cookbooks/imagemagick) (commit: 20aec2)
 * [opscode-cookbooks/java](https://github.com/opscode-cookbooks/java) (commit: c9fe98)
 * [opscode-cookbooks/rsyslog](https://github.com/opscode-cookbooks/rsyslog) (commit: c9ecba)
