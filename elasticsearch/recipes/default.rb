@@ -65,6 +65,9 @@ end
 
 # Download, extract, symlink the elasticsearch libraries and binaries
 #
+ark_prefix_root = node.elasticsearch[:dir] || node.ark[:prefix_root]
+ark_prefix_home = node.elasticsearch[:dir] || node.ark[:prefix_home]
+
 ark "elasticsearch" do
   url   node.elasticsearch[:download_url]
   owner node.elasticsearch[:user]
@@ -72,9 +75,11 @@ ark "elasticsearch" do
   version node.elasticsearch[:version]
   has_binaries ['bin/elasticsearch', 'bin/plugin']
   checksum node.elasticsearch[:checksum]
+  prefix_root   ark_prefix_root
+  prefix_home   ark_prefix_home
 
-  notifies :start,   resources(:service => 'elasticsearch')
-  notifies :restart, resources(:service => 'elasticsearch')
+  notifies :start,   'service[elasticsearch]'
+  notifies :restart, 'service[elasticsearch]'
 end
 
 # Increase open file limits
@@ -112,7 +117,7 @@ template "elasticsearch-env.sh" do
   source "elasticsearch-env.sh.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, resources(:service => 'elasticsearch')
+  notifies :restart, 'service[elasticsearch]'
 end
 
 # Create ES config file
@@ -122,7 +127,7 @@ template "elasticsearch.yml" do
   source "elasticsearch.yml.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, resources(:service => 'elasticsearch')
+  notifies :restart, 'service[elasticsearch]'
 end
 
 # Create ES logging file
@@ -132,5 +137,5 @@ template "logging.yml" do
   source "logging.yml.erb"
   owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
 
-  notifies :restart, resources(:service => 'elasticsearch')
+  notifies :restart, 'service[elasticsearch]'
 end

@@ -12,7 +12,7 @@ node.normal[:elasticsearch]    = DeepMerge.merge(node.normal[:elasticsearch].to_
 
 # === VERSION AND LOCATION
 #
-default.elasticsearch[:version]       = "0.20.5"
+default.elasticsearch[:version]       = "0.90.1"
 default.elasticsearch[:host]          = "http://download.elasticsearch.org"
 default.elasticsearch[:repository]    = "elasticsearch/elasticsearch"
 default.elasticsearch[:filename]      = "elasticsearch-#{node.elasticsearch[:version]}.tar.gz"
@@ -34,12 +34,6 @@ default.elasticsearch[:path][:logs] = "/usr/local/var/log/elasticsearch"
 
 default.elasticsearch[:pid_path]  = "/usr/local/var/run/elasticsearch"
 default.elasticsearch[:pid_file]  = "#{node.elasticsearch[:pid_path]}/#{node.elasticsearch[:node][:name].to_s.gsub(/\W/, '_')}.pid"
-
-# Deprecation notice for legacy path configuration
-Chef::Log.warn "DEPRECATION WARNING! The 'conf_path', 'data_path' and 'log_path' attributes have changed, and will be removed in the next release. Please review your attributes."
-default.elasticsearch[:conf_path] = default.elasticsearch[:path][:conf]
-default.elasticsearch[:data_path] = default.elasticsearch[:path][:data]
-default.elasticsearch[:log_path]  = default.elasticsearch[:path][:logs]
 
 # === MEMORY
 #
