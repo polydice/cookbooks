@@ -2,7 +2,7 @@ require 'minitest/spec'
 
 describe_recipe 'ark::test' do
 
-    # It's often convenient to load these includes in a separate
+  # It's often convenient to load these includes in a separate
   # helper along with
   # your own helper methods, but here we just include them directly:
   include MiniTest::Chef::Assertions
@@ -30,7 +30,11 @@ describe_recipe 'ark::test' do
   it "cherrypicks the mysql connector and set the correct owner and group" do
     file("/usr/local/foo_cherry_pick/foo_sub/foo1.txt").must_have(:owner, "foobarbaz").and(:group, "foobarbaz")
   end
-  
+
+  it "cherrypicks the file from a zip" do
+    file("/usr/local/foo_cherry_pick_from_zip/foo1.txt").must_exist
+  end
+
   it "creates directory and symlink properly for the full ark install" do
     directory("/usr/local/foo-2").must_have(:owner, "foobarbaz").and(:group, "foobarbaz")
     link("/usr/local/foo").must_exist.with(:link_type, :symbolic).and(:to, "/usr/local/foo-2")
@@ -44,7 +48,7 @@ describe_recipe 'ark::test' do
   it "appends to the environment PATH" do
     unless RUBY_PLATFORM =~ /freebsd/
       file("/etc/profile.d/foo_append_env.sh").must_include '/usr/local/foo_append_env-7.0.26/bin'
-      
+
       bin_path_present = !ENV['PATH'].scan( '/usr/local/foo_append_env-7.0.26/bin').empty?
       assert bin_path_present
     end
@@ -58,7 +62,7 @@ describe_recipe 'ark::test' do
     file("/usr/local/foo_zip_strip/foo1.txt").must_exist
   end
 
-  
+
   it "successfully compiles haproxy" do
     file("/usr/local/haproxy-1.5/haproxy").must_exist
   end
@@ -69,7 +73,7 @@ describe_recipe 'ark::test' do
       directory("/usr/local/doc/haproxy").must_exist
     end
   end
-  
+
   it "creates an alternate prefix_bin" do
     link("/opt/bin/do_foo").must_exist.with(:link_type, :symbolic).and(:to, "/opt/foo_alt_bin-3/bin/do_foo")
   end
@@ -86,5 +90,5 @@ describe_recipe 'ark::test' do
   it "uses autogen.sh to generate configure script" do
     file("/usr/local/test_autogen-1/configure").must_exist
   end
-  
+
 end

@@ -4,9 +4,9 @@ maintainer_email "bryan.berry@gmail.com"
 license          "Apache 2.0"
 description      "Installs/Configures ark"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.0.17"
+version          "0.2.4"
 
-%w{ debian ubuntu centos redhat fedora freebsd }.each do |os|
+%w{ debian ubuntu centos redhat fedora }.each do |os|
   supports os
 end
 

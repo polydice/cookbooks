@@ -1,6 +1,36 @@
+## v0.2.4:
+
+### Bug
+
+- [COOK-3048]: Ark provider contains a `ruby_block` resource without a block attribute
+- [COOK-3063]: Ark cookbook `cherry_pick` action's unzip command does not close if statement
+- [COOK-3065]: Ark install action does not symlink binaries correctly
+
+## 0.2.2:
+
+Update the README to reflect the requirement for Chef 11 to use the
+ark resource (`use_inline_resources`).
+
+Making this a release so it will also appear on the community site
+page.
+
+## 0.2.0:
+
+### Bug
+
+- [COOK-2772]: Ark cookbook has foodcritic failures in provides/default.rb
+
+### Improvement
+
+- [COOK-2520]: Refactor ark providers to use the '`use_inline_resources`' LWRP DSL feature
+
+## 0.1.0:
+
+* [COOK-2335] - ark resource broken on Chef 11
+
 ## 0.0.17
 
-* [COOK-2026] - Allow cherry_pick action to be used for directories as
+* [COOK-2026] - Allow `cherry_pick` action to be used for directories as
   well as files
 
 ## 0.0.16
@@ -29,5 +59,5 @@ New features
   not have the file extension as part of the URL
 
 Bug fixes
-* strip_leading_dir not working for zip files
+* `strip_leading_dir` not working for zip files
   https://github.com/bryanwb/chef-ark/issues/19

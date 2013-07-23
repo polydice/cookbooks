@@ -18,7 +18,14 @@
 # limitations under the License.
 #
 
+
 package "unzip"
 package "libtool"
+package "rsync"
 package "autoconf"
-package "autogen"
+package "make"
+package "autogen" unless platform_family?("rhel", "fedora")
+
+if platform?("freebsd")
+  package "gtar"
+end

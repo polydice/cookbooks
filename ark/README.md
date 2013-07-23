@@ -1,14 +1,17 @@
-# <a name="title"></a> chef-ark [![Build Status](https://secure.travis-ci.org/bryanwb/chef-ark.png?branch=master)](http://travis-ci.org/bryanwb/chef-ark)
+# <a name="title"></a> chef-ark [![Build Status](https://secure.travis-ci.org/opscode-cookbooks/ark.png?branch=master)](https://travis-ci.org/opscode-cookbooks/ark)
 
 Overview
 ========
 
-An ''ark'' is like an archive but ''Kewler''
+This cookbook provides `ark`, a resource for managing software
+archives. It manages the fetch-unpack-configure-build-install process
+common to installing software from source, or from binary
+distributions that are not fully fledged OS packages.
 
-Does the fetch-unpack-configure-build-install dance. This is a
-modified  verion of Infochimps awesome install_from cookbook
- [http://github.com/infochimps-cookbooks/install_from]. It has been
- heavily refactored and extended to meet different use cases.
+This is a modified verion of Infochimp's awesome
+[install_from cookbook](http://github.com/infochimps-cookbooks/install_from).
+It has been heavily refactored and extended to meet different use
+cases.
 
 Given a simple project archive available at a url:
 
@@ -16,19 +19,34 @@ Given a simple project archive available at a url:
       url 'http://apache.org/pig/pig-0.8.0.tar.gz'
     end
 
-this provider will
+The provider will:
 
-* fetch  it to to `/var/cache/chef/`
+* fetch it to to `/var/cache/chef/`
 * unpack it to the default path  (`/usr/local/pig-0.8.0`)
 * create a symlink for `:home_dir` (`/usr/local/pig`) pointing to path
 * add specified binary commands to the enviroment `PATH` variable
 
-By default, the ark will not run again if the `:path` is not
-empty. Ark provides many actions to accommodate different use cases,
-such as `:dump`, `:cherry_pick`, `:put`, and `:install_with_make`.
+By default, the ark will not run again if the `:path` is not empty.
+Ark provides many actions to accommodate different use cases, such as
+`:dump`, `:cherry_pick`, `:put`, and `:install_with_make`.
 
 At this time ark only handles files available from URLs. It does not
 handle local files.
+
+Requirements
+============
+
+This cookbook requires Chef 11 for the provider, as it uses the
+`use_inline_resources` method.
+
+More about
+[use_inline_resources](http://docs.opscode.com/lwrp_common_inline_compile.html)
+in the Chef documentation.
+
+Should work on common Unix/Linux systems with typical userland
+utilities like tar, gzip, etc. May require the installation of build
+tools for compiling from source, but that installation is outside the
+scope of this cookbook.
 
 Attributes
 ==========
@@ -36,10 +54,10 @@ Attributes
 Customize the attributes to suit site specific conventions and
 defaults.
 
-* `node['ark']['apache_mirror']` - if the URL is an apache mirror, use
-  the attribute as the default.
-* `node['ark']['prefix_root']` - default base location if the `prefix_root`
-  is not passed into the resource.
+* `node['ark']['apache_mirror']` - if the URL is an apache mirror,
+  usethe attribute as the default.
+* `node['ark']['prefix_root']` - default base location if the
+  `prefix_root` is not passed into the resource.
 * `node['ark']['prefix_bin']` - default binary location if the
   `prefix_bin` is not passed into the resource.
 * `node['ark']['prefix_home']` - default home location if the
@@ -56,8 +74,9 @@ Actions
 - `:install`: extracts the file and creates a 'friendly' symbolic link
   to the extracted directory path
 - `:configure`: configure ahead of the install action
-- `:install_with_make`: extracts the archive to a path, runs `make`, and
-  `make install`. It does _not_ run the configure step at this time
+- `:install_with_make`: extracts the archive to a path, runs `make`,
+  and `make install`. It does _not_ run the configure step at this
+  time
 - `:dump`: strips all directories from the archive and dumps the
   contained files into a specified path
 - `:cherry_pick`: extract a specified file from an archive and places
@@ -67,26 +86,28 @@ Actions
 - `:remove`: removes the extracted directory and related symlink #TODO
 - `:setup_py_build`: runs the command "python setup.py build" in the
   extracted directory
-- `:setup_py_install`:  runs the comand "python setup.py install" in the
-  extracted directory
+- `:setup_py_install`: runs the comand "python setup.py install" in
+  the extracted directory
 
 ## :put
 
-Extract the archive to a specified path, does not create any symbolic links.
+Extract the archive to a specified path, does not create any symbolic
+links.
 
 ### Attribute Parameters for :put
 
 - `path`: path to extract to.
   - Default: `/usr/local`
-- `has_binaries`: array of binary commands to symlink into `/usr/local/bin/`,
-  you must specify the relative path.
+- `has_binaries`: array of binary commands to symlink into
+  `/usr/local/bin/`, you must specify the relative path.
   - Example: `[ 'bin/java', 'bin/javaws' ]`
-- `append_env_path`: boolean, if true, append the `./bin` directory of the
-  extracted directory to the global `PATH` variable for all users.
+- `append_env_path`: boolean, if true, append the `./bin` directory of
+  the extracted directory to the global `PATH` variable for all users.
 
 ## :dump
 
-Strips all directories from the archive and dumps the contained files into a specified path.
+Strips all directories from the archive and dumps the contained files
+into a specified path.
 
 NOTE: This currently only works for zip archives
 
@@ -271,15 +292,14 @@ user 'foobar' is the owner of the `/usr/local/jvm/jdk-7.2` directory
 License and Author
 ==================
 
-- Author: Philip (flip) Kromer - Infochimps,
-  Inc(<coders@infochimps.com>)  
-- Author: Bryan W. Berry (<bryan.berry@gmail.com>)  
-- Author: Denis Barishev (<denis.barishev@gmail.com>)  
-- Author: Elliot Pahl (<elliot.pahl@gmail.com>)  
+- Author: Philip (flip) Kromer - Infochimps, Inc(<coders@infochimps.com>)
+- Author: Bryan W. Berry (<bryan.berry@gmail.com>)
+- Author: Denis Barishev (<denis.barishev@gmail.com>)
+- Author: Sean OMeara (<someara@opscode.com>)
 - Copyright: 2011, Philip (flip) Kromer - Infochimps, Inc
 - Copyright: 2012, Bryan W. Berry
 - Copyright: 2012, Denis Barishev
-- Copyright: 2013, Elliot Pahl
+- Copyright: 2013, Opscode, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

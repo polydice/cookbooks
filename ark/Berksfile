@@ -2,7 +2,8 @@ site :opscode
 
 metadata
 
-cookbook "java"
-cookbook "minitest-handler"
-cookbook "apt"
-
+group :integration do
+  cookbook "apt"
+  cookbook "yum"
+  cookbook "minitest-handler"
+end
