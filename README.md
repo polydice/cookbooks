@@ -21,8 +21,8 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 * [balbeko/chef-npm](https://github.com/balbeko/chef-npm) (commit:b1b48f)
 * [bmhatfield/chef-ulimit](https://github.com/bmhatfield/chef-ulimit) (commit: 588870)
 * [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: 944f92)
-* [bryanwb/chef-ark](https://github.com/bryanwb/chef-ark) (commit: 991613)
-* [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: 1bede8)
+* [opscode-cookbooks/ark](https://github.com/opscode-cookbooks/ark) (commit: fda9ae1)
+* [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: eed9415)
 * [jtimberman/mosh-cookbook](https://github.com/jtimberman/mosh-cookbook) (commit: be9079d)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
 * [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
