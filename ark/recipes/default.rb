@@ -24,7 +24,7 @@ package "libtool"
 package "rsync"
 package "autoconf"
 package "make"
-package "autogen" unless platform_family?("rhel", "fedora")
+package "autogen"
 
 if platform?("freebsd")
   package "gtar"

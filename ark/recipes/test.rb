@@ -134,5 +134,5 @@ ark "test_autogen" do
   extension "tar.gz"
   action :configure
   # autoconf in RHEL < 6 is too old
-  not_if { platform_family?('rhel') && node['platform_version'].to_f < 6.0 }
+  # not_if { platform_family?('rhel') && node['platform_version'].to_f < 6.0 }
 end
