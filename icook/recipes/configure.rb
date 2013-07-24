@@ -11,7 +11,8 @@ node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
   begin
-    elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][:elasticsearch1][:private_ip]
+    elasticsearch_instance = node[:opsworks][:layers][:elasticsearch][:instances].keys.last
+    elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][elasticsearch_instance][:private_ip]
   rescue Exception => e
     elasticsearch_host = nil
   end
