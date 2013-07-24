@@ -37,7 +37,7 @@ action :install do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   remote_file new_resource.release_file do
@@ -45,7 +45,7 @@ action :install do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # unpack based on file extension
@@ -53,7 +53,7 @@ action :install do
     command unpack_command
     cwd new_resource.path
     environment new_resource.environment
-    notifies :run, resources(:execute => 'set owner on #{new_resource.path}')
+    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
     action :nothing
   end
 
@@ -105,7 +105,7 @@ action :put do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # download
@@ -113,7 +113,7 @@ action :put do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # unpack based on file extension
@@ -121,7 +121,7 @@ action :put do
     command unpack_command
     cwd new_resource.path
     environment new_resource.environment
-    notifies :run, resources(:execute => 'set owner on #{new_resource.path}')
+    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
     action :nothing
   end
 
@@ -141,7 +141,7 @@ action :dump do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # download
@@ -150,7 +150,7 @@ action :dump do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # unpack based on file extension
@@ -158,7 +158,7 @@ action :dump do
     command dump_command
     cwd new_resource.path
     environment new_resource.environment
-    notifies :run, resources(:execute => 'set owner on #{new_resource.path}')
+    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
     action :nothing
   end
 
@@ -179,7 +179,7 @@ action :cherry_pick do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'cherry_pick #{new_resource.creates} from #{new_resource.release_file}')
+    notifies :run, resources(:execute => "cherry_pick #{new_resource.creates} from #{new_resource.release_file}")
   end
 
   # download
@@ -187,14 +187,14 @@ action :cherry_pick do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'cherry_pick #{new_resource.creates} from #{new_resource.release_file}')
+    notifies :run, resources(:execute => "cherry_pick #{new_resource.creates} from #{new_resource.release_file}")
   end
 
   execute "cherry_pick #{new_resource.creates} from #{new_resource.release_file}" do
     Chef::Log.debug("DEBUG: unpack_type: #{unpack_type}")
     command cherry_pick_command
     creates "#{new_resource.path}/#{new_resource.creates}"
-    notifies :run, resources(:execute => 'set owner on #{new_resource.path}')
+    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
     action :nothing
   end
 
@@ -215,7 +215,7 @@ action :install_with_make do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   remote_file new_resource.release_file do
@@ -223,7 +223,7 @@ action :install_with_make do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # unpack based on file extension
@@ -231,10 +231,10 @@ action :install_with_make do
     command unpack_command
     cwd new_resource.path
     environment new_resource.environment
-    notifies :run,resoures(:execute => 'autogen #{new_resource.path}')
-    notifies :run,resoures(:execute => 'configure #{new_resource.path}')
-    notifies :run,resoures(:execute => 'make #{new_resource.path}')
-    notifies :run,resoures(:execute => 'make install #{new_resource.path}')
+    notifies :run,resoures(:execute => "autogen #{new_resource.path}")
+    notifies :run,resoures(:execute => "configure #{new_resource.path}")
+    notifies :run,resoures(:execute => "make #{new_resource.path}")
+    notifies :run,resoures(:execute => "make install #{new_resource.path}")
     action :nothing
   end
 
@@ -282,7 +282,7 @@ action :configure do
   directory new_resource.path do
     recursive true
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   remote_file new_resource.release_file do
@@ -290,7 +290,7 @@ action :configure do
     source new_resource.url
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
-    notifies :run, resources(:execute => 'unpack #{new_resource.release_file}')
+    notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
   end
 
   # unpack based on file extension
@@ -298,8 +298,8 @@ action :configure do
     command unpack_command
     cwd new_resource.path
     environment new_resource.environment
-    notifies :run, resources(:execute => 'autogen #{new_resource.path}')
-    notifies :run, resources(:execute => 'configure #{new_resource.path}')
+    notifies :run, resources(:execute => "autogen #{new_resource.path}")
+    notifies :run, resources(:execute => "configure #{new_resource.path}")
     action :nothing
   end
 
