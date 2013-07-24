@@ -26,7 +26,7 @@ template "/etc/apt-cacher-ng/acng.conf" do
   owner "root"
   group "root"
   mode 00644
-  notifies :restart, "service[apt-cacher-ng]"
+  notifies :restart, resources(:service => 'apt-cacher-ng')
 end
 
 service "apt-cacher-ng" do
