@@ -34,6 +34,21 @@ use_inline_resources if defined?(use_inline_resources)
 action :install do
   set_paths
 
+  # set_owner
+  execute "set owner on #{new_resource.path}" do
+    command "/bin/chown -R #{new_resource.owner}:#{new_resource.group} #{new_resource.path}"
+    action :nothing
+  end
+
+  # unpack based on file extension
+  execute "unpack #{new_resource.release_file}" do
+    command unpack_command
+    cwd new_resource.path
+    environment new_resource.environment
+    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
+    action :nothing
+  end
+
   directory new_resource.path do
     recursive true
     action :create
@@ -46,21 +61,6 @@ action :install do
     if new_resource.checksum then checksum new_resource.checksum end
     action :create
     notifies :run, resources(:execute => "unpack #{new_resource.release_file}")
-  end
-
-  # unpack based on file extension
-  execute "unpack #{new_resource.release_file}" do
-    command unpack_command
-    cwd new_resource.path
-    environment new_resource.environment
-    notifies :run, resources(:execute => "set owner on #{new_resource.path}")
-    action :nothing
-  end
-
-  # set_owner
-  execute "set owner on #{new_resource.path}" do
-    command "/bin/chown -R #{new_resource.owner}:#{new_resource.group} #{new_resource.path}"
-    action :nothing
   end
 
   # symlink binaries
