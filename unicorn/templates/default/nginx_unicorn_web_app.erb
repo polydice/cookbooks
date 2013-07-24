@@ -43,6 +43,16 @@ server {
     }
   }
 
+  location ~* ^/assets/ {
+    expires 1y;
+    add_header Cache-Control public;
+
+    if ($request_filename ~* ^.*?\.(eot)|(ttf)|(woff)|(svg)|(otf)$){
+      add_header Access-Control-Allow-Origin *;
+    }
+    break;
+  }
+
   location /nginx_status {
     stub_status on;
     access_log off;
