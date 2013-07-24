@@ -122,7 +122,7 @@ action :add do
       content repository
       action :create
       notifies :delete, "file[/var/lib/apt/periodic/update-success-stamp]", :immediately
-      notifies :run, "execute[apt-get update]", :immediately if new_resource.cache_rebuild
+      notifies :run, resources(:execute => 'apt-get update'), :immediately if new_resource.cache_rebuild
     end
   end
 
