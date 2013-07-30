@@ -76,4 +76,16 @@ node[:deploy].each do |application, deploy|
       )
     end
   end
+
+  if deploy[:remote_configs]
+    deploy[:remote_configs].each do |url|
+      basename = File.basename(url)
+      remote_file "#{deploy[:deploy_to]}/shared/config/#{basename}" do
+        source url
+        owner deploy[:user]
+        group deploy[:group]
+        mode 00644
+      end
+    end
+  end
 end
