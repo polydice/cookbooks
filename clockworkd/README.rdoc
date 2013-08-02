@@ -1,0 +1,11 @@
+= DESCRIPTION:
+
+Clockworkd is a repeated tasks scheduler written in Ruby.
+
+= USAGE:
+
+add require_recipe "clockworkd" to main/recipes/default.rb
+
+= NOTES:
+
+
