@@ -30,7 +30,8 @@ node[:deploy].each do |application, deploy|
       "papertrail" => node[:papertrail],
       "elasticsearch" => node[:elasticsearch].merge({:host => elasticsearch_host}),
       "legacy" => node[:legacy],
-      "pusher" => node[:pusher]
+      "pusher" => node[:pusher],
+      "sso" => node[:sso]
     )
   end
 

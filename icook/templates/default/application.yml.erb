@@ -42,6 +42,10 @@ defaults: &defaults
   legacy:
     secret_token: "<%= @legacy[:secret_token] %>"
   <% end %>
+  <% if @sso %>
+  sso:
+    internal_clients: <%= @sso[:internal_clients] %>
+  <% end %>
 
 development:
   <<: *defaults
