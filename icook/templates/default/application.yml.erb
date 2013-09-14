@@ -1,2 +1,2 @@
 # config/application.yml
-<%= @settings.to_yaml %>
+<%= @settings.to_yaml.gsub " !map:Mash ", "" %>
