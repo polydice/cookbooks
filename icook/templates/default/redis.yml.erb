@@ -1,4 +1,2 @@
-production:
-  db: 1
-  host: <%= @host %>
-  port: 6379
+# config/redis.yml
+<%= @redis.to_yaml.gsub " !map:Mash ", "" %>

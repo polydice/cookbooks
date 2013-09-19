@@ -31,21 +31,16 @@ node[:deploy].each do |application, deploy|
     )
   end
 
-  begin
-    redis_instance = node[:opsworks][:layers][:redis][:instances].keys.last
-    redis_host = node[:opsworks][:layers][:redis][:instances][redis_instance][:private_ip]
-  rescue Exception => e
-    redis_host = nil
-  end
-
-  if redis_host
+  if node[:redis]
     template "#{deploy[:deploy_to]}/shared/config/redis.yml" do
       source "redis.yml.erb"
       mode 0755
       group deploy[:group]
       owner deploy[:user]
+
+      redis = Hash[node["redis"]]
       variables(
-        "host" => redis_host
+        "redis" => redis
       )
     end
   end
