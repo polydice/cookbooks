@@ -13,22 +13,24 @@ node[:deploy].each do |application, deploy|
   begin
     elasticsearch_instance = node[:opsworks][:layers][:elasticsearch][:instances].keys.last
     elasticsearch_host = node[:opsworks][:layers][:elasticsearch][:instances][elasticsearch_instance][:private_ip]
-  rescue Exception => e
+  rescue
     elasticsearch_host = nil
   end
 
-  template "#{deploy[:deploy_to]}/shared/config/application.yml" do
-    source "application.yml.erb"
-    mode 0755
-    group deploy[:group]
-    owner deploy[:user]
+  if node[:settings]
+    template "#{deploy[:deploy_to]}/shared/config/application.yml" do
+      source "application.yml.erb"
+      mode 0755
+      group deploy[:group]
+      owner deploy[:user]
 
-    settings = Hash[node["settings"]]
-    tire_hash = { "tire" => { "url" => "http://#{elasticsearch_host}:9200" } }
-    settings["production"].merge!(tire_hash)
-    variables(
-      "settings" => settings
-    )
+      settings = Hash[node["settings"]]
+      tire_hash = { "tire" => { "url" => "http://#{elasticsearch_host}:9200" } }
+      settings["production"].merge!(tire_hash)
+      variables(
+        "settings" => settings
+      )
+    end
   end
 
   if node[:redis]
