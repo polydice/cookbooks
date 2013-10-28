@@ -59,18 +59,6 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-  if node[:scout_rails]
-    template "#{deploy[:deploy_to]}/shared/config/scout_rails.yml" do
-      source "scout_rails.yml.erb"
-      mode 0755
-      group deploy[:group]
-      owner deploy[:user]
-      variables(
-        "scout_rails" => node[:scout_rails]
-      )
-    end
-  end
-
   if deploy[:remote_configs]
     deploy[:remote_configs].each do |url|
       basename = File.basename(url)
