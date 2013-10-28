@@ -23,6 +23,7 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 * [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: 944f92)
 * [opscode-cookbooks/ark](https://github.com/opscode-cookbooks/ark) (commit: fda9ae1)
 * [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: eed9415)
+* [escapestudios/chef-newrelic](https://github.com/escapestudios/chef-newrelic) (commit: f556ca)
 * [jtimberman/mosh-cookbook](https://github.com/jtimberman/mosh-cookbook) (commit: be9079d)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
 * [mdxp/nodejs-cookbook](https://github.com/mdxp/nodejs-cookbook) (commit: 164383)
