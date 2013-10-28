@@ -11,6 +11,11 @@ case node['platform']
             action :install
         end
 
+        service node['newrelic']['service_name'] do
+            supports :status => true, :start => true, :stop => true, :restart => true
+            action [:enable] #starts the service if it's not running and enables it to start at system boot time
+        end
+
         #configure your New Relic license key
         template "#{node['newrelic']['config_path']}/nrsysmond.cfg" do
             source "nrsysmond.cfg.erb"
@@ -29,16 +34,11 @@ case node['platform']
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']
             )
-            notifies :restart, "service[#{node['newrelic']['service_name']}]"
-        end
-
-        service node['newrelic']['service_name'] do
-            supports :status => true, :start => true, :stop => true, :restart => true
-            action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
+            notifies :restart, resources(:service => "#{node['newrelic']['service_name']}")
         end
     when "windows"
         include_recipe "ms_dotnet4"
-        
+
         if node['kernel']['machine'] == "x86_64"
                 windows_package "New Relic Server Monitor" do
                 source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
