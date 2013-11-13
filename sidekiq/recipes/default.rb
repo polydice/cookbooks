@@ -10,6 +10,7 @@ node[:deploy].each do |application, deploy|
     mode 0644
     source "monitrc.conf.erb"
     variables({
+      :worker_count => node[:sidekiq][:worker_count],
       :app_name => application,
       :deploy => deploy
     })
