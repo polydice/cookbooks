@@ -1,0 +1,12 @@
+[global]
+ipsec saref = yes
+
+[lns default]
+ip range = <%= node['openswan']['private_ip_range'] %>
+local ip = <%= node['openswan']['private_virtual_interface_ip'] %>
+refuse chap = yes
+refuse pap = yes
+require authentication = yes
+ppp debug = yes
+pppoptfile = /etc/ppp/options.xl2tpd
+length bit = yes
