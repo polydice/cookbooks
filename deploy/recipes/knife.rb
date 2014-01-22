@@ -6,8 +6,6 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  Chef::Log.debug("#{deploy[:application_type]} | #{application}")
-
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
@@ -17,5 +15,12 @@ node[:deploy].each do |application, deploy|
   opsworks_deploy do
     deploy_data deploy
     app application
+  end
+
+  execute "build from the go source of #{application}" do
+    command "export GOPATH=/home/deploy/source"
+    cwd deploy[:current_path]
+    command "go get"
+    action :run
   end
 end
