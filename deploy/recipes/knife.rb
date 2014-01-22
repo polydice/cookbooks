@@ -32,8 +32,6 @@ node[:deploy].each do |application, deploy|
   end
 
   bash "build from the go source of #{application}" do
-    user deploy[:user]
-
     code <<-EOH
     mkdir /opt/go/src
     ln -fs #{deploy[:current_path]} /opt/go/src/knife
