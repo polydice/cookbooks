@@ -33,10 +33,11 @@ node[:deploy].each do |application, deploy|
 
   bash "build from the go source of #{application}" do
     code <<-EOH
-    mkdir /opt/go/src
-    ln -fs #{deploy[:current_path]} /opt/go/src/knife
-    cd /opt/go/src/knife
-    go get
+    export GOPATH=/opt/go
+    mkdir -p /opt/go/src/github.com/polydice/knife
+    cp -rf #{deploy[:current_path]}/* /opt/go/src/github.com/polydice/knife/
+    cd /opt/go/src/github.com/polydice/knife
+    /usr/local/go/bin/go get
     EOH
 
     action :run
