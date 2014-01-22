@@ -31,11 +31,16 @@ node[:deploy].each do |application, deploy|
     end
   end
 
-  execute "build from the go source of #{application}" do
-    command "export GOPATH=/home/deploy/source"
-    cwd deploy[:current_path]
-    # The installation of go should be global.
-    command "/usr/local/go/bin/go get"
+  bash "build from the go source of #{application}" do
+    user deploy[:user]
+
+    code <<-EOH
+    mkdir /opt/go/src
+    ln -fs #{deploy[:current_path]} /opt/go/src/knife
+    cd /opt/go/src/knife
+    go get
+    EOH
+
     action :run
   end
 end
