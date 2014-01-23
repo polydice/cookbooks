@@ -1,13 +1,13 @@
-node[:deploy].each do |application, _|
+node[:deploy].each do |application, deploy|
   if node[:deploy][application][:application_type] != 'knife'
     Chef::Log.debug("Skipping knife::deploy for application #{application} as it is not set as a knife app")
     next
   end
 
   knife_deploy_dir do
-    user    node[:deploy][application][:user]
-    group   node[:deploy][application][:group]
-    path    node[:deploy][application][:deploy_to]
+    user    deploy[:user]
+    group   deploy[:group]
+    path    deploy[:deploy_to]
   end
 
   knife_scm do
@@ -20,11 +20,11 @@ node[:deploy].each do |application, _|
     hostname                    node[:hostname]
     basicauth_users             node[:knife][application][:basicauth_users]
     knife_application_settings  node[:knife][application]
-    deploy_to                   node[:deploy][application][:deploy_to]
+    deploy_to                   deploy[:deploy_to]
     env_vars                    node[:knife][application][:env]
     monit_conf_dir              node[:monit][:conf_dir]
-    group                       node[:deploy][application][:group]
-    user                        node[:deploy][application][:user]
+    group                       deploy[:group]
+    user                        deploy[:user]
     service_realm               node[:knife][application][:service_realm]
     s3_access_key               node[:s3_config][:access_key]
     s3_secret_key               node[:s3_config][:secret_key]
