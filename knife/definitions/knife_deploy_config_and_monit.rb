@@ -29,11 +29,11 @@ define :knife_deploy_config_and_monit do
     group    'root'
     mode     '0751'
     variables(
-      :pid_file         => params[:nutty_application_settings][:pid_file],
+      :pid_file         => params[:knife_application_settings][:pid_file],
       :release_path     => "#{params[:deploy_to]}/current",
       :application_name => params[:application_name],
-      :config_file      => params[:nutty_application_settings][:config_file],
-      :output_file      => params[:nutty_application_settings][:output_file]
+      :config_file      => params[:knife_application_settings][:config_file],
+      :output_file      => params[:knife_application_settings][:output_file]
     )
   end
 
