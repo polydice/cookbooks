@@ -96,8 +96,8 @@ define :knife_scm do
           bash "go-get-and-build-knife-server" do
             cwd release_path
             code <<-EOH
-            #{node['go']['install_dir']}/go/bin/go get .
-            #{node['go']['install_dir']}/go/bin/go build -o ./knife_#{application}_server server.go
+            GOPATH=#{deploy[:deploy_to]} #{node['go']['install_dir']}/go/bin/go get .
+            GOPATH=#{deploy[:deploy_to]} #{node['go']['install_dir']}/go/bin/go build -o ./knife_#{application}_server server.go
             EOH
             action :run
           end
