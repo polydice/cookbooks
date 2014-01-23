@@ -1,0 +1,43 @@
+node[:deploy].each do |application, _|
+  if node[:deploy][application][:application_type] != 'knife'
+    Chef::Log.debug("Skipping knife::deploy for application #{application} as it is not set as a knife app")
+    next
+  end
+
+  knife_deploy_dir do
+    user    node[:deploy][application][:user]
+    group   node[:deploy][application][:group]
+    path    node[:deploy][application][:deploy_to]
+  end
+
+  knife_scm do
+    deploy_data   node[:deploy][application]
+    app           application
+    go_get?       node[:nutty][application][:auto_go_get_on_deploy]
+    go_build?     node[:nutty][application][:auto_go_build_on_deploy]
+    gopath        "#{node[:deploy][application][:deploy_to]}/current/build"
+  end
+
+  knife_deploy_config_and_monit do
+    application_name            application
+    hostname                    node[:hostname]
+    basicauth_users             node[:knife][application][:basicauth_users]
+    knife_application_settings  node[:knife][application]
+    deploy_to                   node[:deploy][application][:deploy_to]
+    env_vars                    node[:knife][application][:env]
+    monit_conf_dir              node[:monit][:conf_dir]
+    group                       node[:deploy][application][:group]
+    user                        node[:deploy][application][:user]
+    service_realm               node[:knife][application][:service_realm]
+    s3_access_key               node[:s3_config][:access_key]
+    s3_secret_key               node[:s3_config][:secret_key]
+  end
+
+  ruby_block "restart knife application #{application}" do
+    block do
+      Chef::Log.info("restart knife app server via: #{node[:knife][application][:restart_server_command]}")
+      Chef::Log.info(`#{node[:knife][application][:restart_server_command]}`)
+      $? == 0
+    end
+  end
+end

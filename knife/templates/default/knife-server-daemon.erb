@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case $1 in
+  start)
+     if [ -e <%= @pid_file %> ]
+     then
+       echo "Server already running";
+     else
+       echo $$ > <%= @pid_file %>;
+       <%= @release_path %>/knife_<%= @application_name %>_server;
+       rm <%= @pid_file %>;
+     fi
+     ;;
+   stop)
+     /usr/bin/pkill -2 -P `cat <%= @pid_file %>`;
+     rm <%= @pid_file %>
+     ;;
+   restart)
+     stop ; echo "Sleeping..."; sleep 1 ;
+     start
+     ;;
+   *)
+     echo "usage: knife-<%= @application_name %>-server-daemon {start|stop|restart}" ;;
+esac
+exit 0
