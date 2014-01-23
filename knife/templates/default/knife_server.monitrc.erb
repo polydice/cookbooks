@@ -1,7 +1,3 @@
-check host knife_<%= @application_name %>_server with address 127.0.0.1
-  start program = "<%= @release_path %>/knife-<%= @application_name %>-server-daemon start"
-  stop program  = "<%= @release_path %>/knife-<%= @application_name %>-server-daemon stop"
-  if failed port <%= @port %> protocol HTTP
-    request /
-    with timeout 10 seconds
-    then restart
+check process knife_<%= @application_name %>_server with pidfile <%= @deploy_to %>/shared/pids/knife.pid
+  start program = "/bin/bash -c 'echo $$ > <%= @deploy_to %>/shared/pids/knife.pid; cd <%= @deploy_to %>/current; exec ./knife_<%= @application_name %>_server'"
+  stop program = "/bin/bash -c '/bin/kill -TERM `cat <%= @deploy_to %>/shared/pids/knife.pid`'"

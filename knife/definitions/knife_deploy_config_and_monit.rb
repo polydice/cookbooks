@@ -44,7 +44,7 @@ define :knife_deploy_config_and_monit do
     mode    '0644'
     variables(
       :application_name => params[:application_name],
-      :release_path     => "#{params[:deploy_to]}/current",
+      :deploy_to     => params[:deploy_to],
       :port             => 80
     )
     notifies :restart, resources(:service => 'monit'), :immediately
