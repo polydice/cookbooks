@@ -1,10 +1,12 @@
+include_recipe 'deploy'
+
 node[:deploy].each do |application, deploy|
   if node[:deploy][application][:application_type] != 'knife'
     Chef::Log.debug("Skipping knife::deploy for application #{application} as it is not set as a knife app")
     next
   end
 
-  knife_deploy_dir do
+  opsworks_deploy_dir do
     user    deploy[:user]
     group   deploy[:group]
     path    deploy[:deploy_to]
