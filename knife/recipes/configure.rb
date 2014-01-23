@@ -2,7 +2,7 @@ include_recipe 'golang'
 
 node[:deploy].each do |application, _|
   if node[:deploy][application][:application_type] != 'knife'
-    Chef::Log.debug("Skipping knife::deploy for application #{application} as it is not set as a knife app")
+    Chef::Log.debug("Skipping knife::configure for application #{application} as it is not set as a knife app")
     next
   end
 
