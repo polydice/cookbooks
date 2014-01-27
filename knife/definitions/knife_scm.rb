@@ -100,7 +100,6 @@ define :knife_scm do
             cp -rf ./* #{deploy[:deploy_to]}/src/github.com/polydice/knife/
             GOPATH=#{deploy[:deploy_to]} #{node['go']['install_dir']}/go/bin/go get .
             GOPATH=#{deploy[:deploy_to]} #{node['go']['install_dir']}/go/bin/go build -o ./knife_#{application}_server
-            cp #{deploy[:deploy_to]}/shared/config/s3.json #{deploy[:deploy_to]}/current/config/s3.json
             EOH
             action :run
           end
