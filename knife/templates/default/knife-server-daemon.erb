@@ -2,8 +2,9 @@
 
 case $1 in
   start)
+    cd <%= @release_path %>;
     echo $$ > <%= @pid_file %>;
-    exec 2>&1 <%= @release_path %>/knife_<%= @application_name %>_server 1>/tmp/knife.out;
+    exec <%= @release_path %>/knife_<%= @application_name %>_server > /tmp/knife.out 2>&1;
     ;;
   stop)
     kill `cat <%= @pid_file %>`;;
