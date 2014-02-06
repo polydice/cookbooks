@@ -28,7 +28,7 @@ define :knife_deploy_config_and_monit do
   end
 
 
-  template "#{deploy[:current_path]}/config/application.json" do
+  template "#{params[:deploy_to]}/shared/application.json" do
     source  'application.json.erb'
     mode    '0660'
     owner    params[:user]
