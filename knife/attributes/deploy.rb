@@ -15,4 +15,9 @@ node[:deploy].each do |application, _|
   default[:knife][application][:config_file] = "#{node[:deploy][application][:deploy_to]}/shared/config/knife.properties"
   default[:knife][application][:pid_file] = "#{node[:deploy][application][:deploy_to]}/shared/pids/knife.pid"
   default[:knife][application][:output_file] = "#{node[:deploy][application][:deploy_to]}/shared/log/knife.log"
+
+  default[:deploy][application][:symlink_before_migrate] = {
+    "config/application.json" => "config/application.json",
+    "config/s3.json" => "config/s3.json"
+  }
 end

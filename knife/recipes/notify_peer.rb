@@ -7,7 +7,6 @@ bash "update-gc-peers" do
   code <<-EOH
   sleep 60
   curl -X POST -d "#{peers.join("&")}" http://127.0.0.1:#{node[:application_config][:peer_manager_port]}/peers
-  cp #{node[:deploy][:knife][:deploy_to]}/shared/config/* #{node[:deploy][:knife][:deploy_to]}/current/config/
   EOH
   action :run
 end
