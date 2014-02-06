@@ -31,6 +31,20 @@ node[:deploy].each do |application, deploy|
     end
   end
 
+  template "#{deploy[:current_path]}/config/application.json" do
+    source "application.json.erb"
+    mode 0755
+    group deploy[:group]
+    owner deploy[:user]
+
+    variables(
+      "private_ip" => node[:opsworks][:instance][:private_ip],
+      "gc_port" => node[:application_config][:gc_httppool_port],
+      "pm_port" => node[:application_config][:peer_manager_port],
+      "web_port" => node[:application_config][:web_server_port]
+    )
+  end
+
   bash "build from the go source of #{application}" do
     code <<-EOH
     export GOPATH=/opt/go

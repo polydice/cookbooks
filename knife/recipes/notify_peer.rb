@@ -1,6 +1,6 @@
 peers = []
 node[:opsworks][:layers][:go_app_server][:instances].each do |key, instance|
-  peers << "peers=http://#{instance[:public_ip]}:5000"
+  peers << "peers=http://#{instance[:pirvate_ip]}:5000"
 end
 
 bash "update-gc-peers" do
