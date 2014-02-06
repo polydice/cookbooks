@@ -1,11 +1,11 @@
 {
   "groupcache": {
-    "listen": "<%= @private_ip %><%= @gc_port %>"
+    "listen": "<%= @private_ip %>:<%= @gc_port %>"
   },
   "peer_manager": {
-    "port": ":<%= @pm_port %>"
+    "port": "<%= @pm_port %>"
   },
   "web_server": {
-    "port": ":<%= @web_port %>"
+    "port": "<%= @web_port %>"
   }
 }
