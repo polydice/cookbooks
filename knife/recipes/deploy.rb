@@ -19,17 +19,17 @@ node[:deploy].each do |application, deploy|
 
   knife_deploy_config_and_monit do
     application_name            application
-    hostname                    node[:hostname]
-    basicauth_users             node[:knife][application][:basicauth_users]
     knife_application_settings  node[:knife][application]
     deploy_to                   deploy[:deploy_to]
-    env_vars                    node[:knife][application][:env]
     monit_conf_dir              node[:monit][:conf_dir]
     group                       deploy[:group]
     user                        deploy[:user]
-    service_realm               node[:knife][application][:service_realm]
     s3_access_key               node[:s3_config][:access_key]
     s3_secret_key               node[:s3_config][:secret_key]
+    private_ip                  node[:opsworks][:instance][:private_ip]
+    gc_port                     node[:application_config][:gc_httppool_port]
+    pm_port                     node[:application_config][:peer_manager_port]
+    web_port                    node[:application_config][:web_server_port]
   end
 
   ruby_block "restart knife application #{application}" do

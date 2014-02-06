@@ -1,12 +1,16 @@
 define :knife_deploy_config_and_monit do
   # application_name
-  # knife_application_settings
-  # hostname
   # deploy_to
-  # env_vars
   # monit_conf_dir
   # group
   # user
+  # s3_access_key
+  # s3_secret_key
+  # private_ip
+  # gc_port
+  # pm_port
+  # web_port
+  # knife_application_settings
 
   service 'monit' do
     action :nothing
@@ -20,6 +24,20 @@ define :knife_deploy_config_and_monit do
     variables(
       "access_key" => params[:s3_access_key],
       "secret_key" => params[:s3_secret_key]
+    )
+  end
+
+
+  template "#{deploy[:current_path]}/config/application.json" do
+    source  'application.json.erb'
+    mode    '0660'
+    owner    params[:user]
+    group    params[:group]
+    variables(
+      "private_ip" => params[:private_ip],
+      "gc_port" => params[:gc_port],
+      "pm_port" => params[:pm_port],
+      "web_port" => params[:web_port]
     )
   end
 
