@@ -1,0 +1,9 @@
+= DESCRIPTION:
+
+Generate .env file for dotenv.
+
+= USAGE:
+
+add require_recipe "dotenv" to main/recipes/default.rb
+
+= NOTES:
