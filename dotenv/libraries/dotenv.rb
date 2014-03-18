@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 
-module DotenvHelper
+module Dotenv
   def self.walk(node, parents = [])
     if node.is_a? Hash
       node.map { |k, v| walk(v, parents + [k]) }.flatten

@@ -5,7 +5,7 @@
 
 node[:deploy].each do |application, deploy|
   if deploy[:env]
-    file "#{deploy[:deploy_to]}/shared/.env" do
+    file "/srv/www/#{application}/shared/.env" do
       mode 0644
       owner deploy[:user]
       group deploy[:group]
