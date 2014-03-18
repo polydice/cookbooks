@@ -13,7 +13,6 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 
 These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for modification.
 
-* rails (commit: df634d)
 * unicorn (commit: 68aca1)
 
 ## 3rd Party Cookbooks
