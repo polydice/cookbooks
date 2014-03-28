@@ -1,0 +1,31 @@
+version 2.0
+
+config setup
+    nat_traversal=yes
+  ###  virtual_private=%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12
+  ### NOTE:  this specifies what gets sent over the IPSEC tunnel.
+  ### our ppp/L2TP link is 10.55.55.x, so we do that here.  Add private interfaces or loopbacks
+  ### as you see fit.
+  ### <%= node['openswan']['private_virtual_interface_ip'] %> is your private ip address
+    virtual_private=%v4:<%= node['openswan']['ppp_link_network'] %>/24,%v4:<%= node['openswan']['private_ip'] %>/32
+    oe=off
+    protostack=netkey
+
+conn L2TP-PSK-NAT
+    rightsubnet=vhost:%priv
+    also=L2TP-PSK-noNAT
+
+conn L2TP-PSK-noNAT
+    authby=secret
+    pfs=no
+    auto=add
+    keyingtries=3
+    rekey=no
+    ikelifetime=8h
+    keylife=1h
+    type=transport
+     ### NOTE:  "left" here is "the VPN server in the cloud".  Change this to your public IP.
+    left=<%= node[:ipaddress] %>
+    leftprotoport=17/1701
+    right=%any
+    rightprotoport=17/%any
