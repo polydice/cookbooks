@@ -1,0 +1,10 @@
+{
+  "sources": {
+    "mosh": {
+      "locked_version": "0.3.0"
+    },
+    "apt": {
+      "locked_version": "2.3.8"
+    }
+  }
+}
