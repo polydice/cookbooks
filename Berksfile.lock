@@ -9,8 +9,32 @@
     "java": {
       "locked_version": "1.22.0"
     },
+    "sysctl": {
+      "locked_version": "0.4.0"
+    },
+    "rsyslog": {
+      "locked_version": "1.12.2"
+    },
+    "ark": {
+      "locked_version": "0.8.0"
+    },
+    "ulimit": {
+      "locked_version": "0.3.2"
+    },
+    "elasticsearch": {
+      "locked_version": "0.3.8"
+    },
+    "redisio": {
+      "locked_version": "1.7.1"
+    },
     "apt": {
       "locked_version": "2.3.8"
+    },
+    "xml": {
+      "locked_version": "1.2.4"
+    },
+    "monit": {
+      "locked_version": "0.7.1"
     }
   }
 }
