@@ -24,5 +24,4 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 * [escapestudios/chef-newrelic](https://github.com/escapestudios/chef-newrelic) (commit: f556ca)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
 * [onehealth-cookbooks/sysctl](https://github.com/onehealth-cookbooks/sysctl) (commit: 494290)
-* [opscode-cookbooks/imagemagick](https://github.com/opscode-cookbooks/imagemagick) (commit: 20aec2)
 * [opscode-cookbooks/rsyslog](https://github.com/opscode-cookbooks/rsyslog) (commit: c9ecba)
