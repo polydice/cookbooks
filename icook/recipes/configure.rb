@@ -24,15 +24,12 @@ node[:deploy].each do |application, deploy|
       group deploy[:group]
       owner deploy[:user]
 
-      settings = Hash[node.default["settings"]]
-
       if elasticsearch_host
-        tire_hash = { "tire" => { "url" => "http://#{elasticsearch_host}:9200" } }
-        settings["production"].merge!(tire_hash)
+        node.default["settings"]["production"]["tire"] = { "url" => "http://#{elasticsearch_host}:9200" }
       end
 
       variables(
-        "settings" => settings
+        "settings" => Hash[node["settings"]]
       )
     end
   end
