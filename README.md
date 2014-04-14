@@ -17,16 +17,5 @@ These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for mod
 
 ## 3rd Party Cookbooks
 
-* [bmhatfield/chef-ulimit](https://github.com/bmhatfield/chef-ulimit) (commit: 588870)
-* [brianbianco/redisio](https://github.com/brianbianco/redisio) (commit: 944f92)
-* [opscode-cookbooks/ark](https://github.com/opscode-cookbooks/ark) (commit: fda9ae1)
-* [elasticsearch/cookbook-elasticsearch](https://github.com/elasticsearch/cookbook-elasticsearch) (commit: eed9415)
 * [escapestudios/chef-newrelic](https://github.com/escapestudios/chef-newrelic) (commit: f556ca)
-* [jtimberman/mosh-cookbook](https://github.com/jtimberman/mosh-cookbook) (commit: be9079d)
 * [librato/papertrail-cookbook](https://github.com/librato/papertrail-cookbook) (commit: 3092a
-* [onehealth-cookbooks/sysctl](https://github.com/onehealth-cookbooks/sysctl) (commit: 494290)
-* [opscode-cookbooks/apt](https://github.com/opscode-cookbooks/apt) (commit: 302857)
-* [opscode-cookbooks/build-essential](https://github.com/opscode-cookbooks/build-essential) (commit: 31d74e)
-* [opscode-cookbooks/imagemagick](https://github.com/opscode-cookbooks/imagemagick) (commit: 20aec2)
-* [opscode-cookbooks/java](https://github.com/opscode-cookbooks/java) (commit: c9fe98)
-* [opscode-cookbooks/rsyslog](https://github.com/opscode-cookbooks/rsyslog) (commit: c9ecba)
