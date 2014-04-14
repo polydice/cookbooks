@@ -24,7 +24,7 @@ node[:deploy].each do |application, deploy|
       group deploy[:group]
       owner deploy[:user]
 
-      settings = Hash[node["settings"]]
+      settings = Hash[node.default["settings"]]
 
       if elasticsearch_host
         tire_hash = { "tire" => { "url" => "http://#{elasticsearch_host}:9200" } }
