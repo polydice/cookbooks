@@ -1,40 +1,34 @@
-{
-  "sources": {
-    "mosh": {
-      "locked_version": "0.3.0"
-    },
-    "build-essential": {
-      "locked_version": "2.0.0"
-    },
-    "java": {
-      "locked_version": "1.22.0"
-    },
-    "sysctl": {
-      "locked_version": "0.4.0"
-    },
-    "rsyslog": {
-      "locked_version": "1.12.2"
-    },
-    "ark": {
-      "locked_version": "0.8.0"
-    },
-    "ulimit": {
-      "locked_version": "0.3.2"
-    },
-    "elasticsearch": {
-      "locked_version": "0.3.8"
-    },
-    "redisio": {
-      "locked_version": "1.7.1"
-    },
-    "apt": {
-      "locked_version": "2.3.8"
-    },
-    "xml": {
-      "locked_version": "1.2.4"
-    },
-    "monit": {
-      "locked_version": "0.7.1"
-    }
-  }
-}
+DEPENDENCIES
+  ark
+  build-essential
+  elasticsearch
+  ipaddr_extensions
+  java
+  mosh
+  redisio
+  rsyslog
+  sysctl
+  ulimit
+
+GRAPH
+  apt (2.3.10)
+  ark (0.8.2)
+  build-essential (2.0.0)
+  elasticsearch (0.3.8)
+    ark (>= 0.2.4)
+    build-essential (>= 0.0.0)
+    java (>= 0.0.0)
+    monit (>= 0.0.0)
+    xml (>= 0.0.0)
+  ipaddr_extensions (0.3.0)
+  java (1.22.0)
+  monit (0.7.1)
+  mosh (0.3.0)
+    apt (>= 0.0.0)
+  redisio (1.7.1)
+    ulimit (>= 0.1.2)
+  rsyslog (1.12.2)
+  sysctl (0.4.0)
+  ulimit (0.3.2)
+  xml (1.2.4)
+    build-essential (>= 0.0.0)
