@@ -27,8 +27,11 @@
     "redisio": {
       "locked_version": "1.7.1"
     },
+    "ipaddr_extensions": {
+      "locked_version": "0.3.0"
+    },
     "apt": {
-      "locked_version": "2.3.8"
+      "locked_version": "2.3.10"
     },
     "xml": {
       "locked_version": "1.2.4"
