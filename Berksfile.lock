@@ -1,13 +1,15 @@
 {
   "sources": {
     "ark": {
-      "locked_version": "0.8.0"
+      "locked_version": "0.8.2"
     },
     "build-essential": {
       "locked_version": "2.0.0"
     },
     "dokku": {
-      "locked_version": "0.2.0"
+      "locked_version": "0.2.0",
+      "git": "git@github.com:fgrehm/chef-dokku.git",
+      "ref": "a7f76c688c6b0f4b49b85afb89af99037a58abe6"
     },
     "elasticsearch": {
       "locked_version": "0.3.8"
@@ -57,29 +59,26 @@
     "yum-epel": {
       "locked_version": "0.3.6"
     },
+    "user": {
+      "locked_version": "0.3.0"
+    },
+    "sudo": {
+      "locked_version": "2.5.2"
+    },
     "nginx": {
-      "locked_version": "1.8.0"
+      "locked_version": "2.2.2"
+    },
+    "bluepill": {
+      "locked_version": "2.3.1"
     },
     "ohai": {
-      "locked_version": "2.0.0"
+      "locked_version": "1.1.12"
     },
     "docker": {
-      "locked_version": "0.34.1"
-    },
-    "aufs": {
-      "locked_version": "0.1.1"
-    },
-    "modules": {
-      "locked_version": "0.2.0"
-    },
-    "device-mapper": {
-      "locked_version": "0.1.0"
+      "locked_version": "0.24.2"
     },
     "golang": {
       "locked_version": "1.3.0"
-    },
-    "homebrew": {
-      "locked_version": "1.6.0"
     },
     "lxc": {
       "locked_version": "1.1.8"
@@ -87,11 +86,8 @@
     "dpkg_autostart": {
       "locked_version": "0.1.10"
     },
-    "user": {
-      "locked_version": "0.3.0"
-    },
-    "sudo": {
-      "locked_version": "2.5.2"
+    "modules": {
+      "locked_version": "0.2.0"
     },
     "xml": {
       "locked_version": "1.2.4"

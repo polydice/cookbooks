@@ -2,7 +2,7 @@ site :opscode
 
 cookbook 'ark'
 cookbook 'build-essential'
-cookbook 'dokku'
+cookbook 'dokku', git: 'git@github.com:fgrehm/chef-dokku.git'
 cookbook 'elasticsearch'
 cookbook 'ipaddr_extensions'
 cookbook 'java'
