@@ -8,7 +8,7 @@
     },
     "dokku": {
       "locked_version": "0.2.0",
-      "git": "git@github.com:fgrehm/chef-dokku.git",
+      "git": "https://github.com/fgrehm/chef-dokku.git",
       "ref": "a7f76c688c6b0f4b49b85afb89af99037a58abe6"
     },
     "elasticsearch": {
