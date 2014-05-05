@@ -4,7 +4,7 @@
       "locked_version": "0.8.2"
     },
     "build-essential": {
-      "locked_version": "1.4.4"
+      "locked_version": "2.0.2"
     },
     "dokku": {
       "locked_version": "0.2.0",
