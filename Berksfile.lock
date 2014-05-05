@@ -6,6 +6,9 @@
     "build-essential": {
       "locked_version": "1.4.4"
     },
+    "docker": {
+      "locked_version": "0.34.1"
+    },
     "dokku": {
       "locked_version": "0.2.0",
       "git": "https://github.com/fgrehm/chef-dokku.git",
@@ -38,6 +41,15 @@
     "apt": {
       "locked_version": "2.3.10"
     },
+    "aufs": {
+      "locked_version": "0.1.1"
+    },
+    "modules": {
+      "locked_version": "0.2.0"
+    },
+    "device-mapper": {
+      "locked_version": "0.1.0"
+    },
     "git": {
       "locked_version": "4.0.2"
     },
@@ -59,6 +71,18 @@
     "yum-epel": {
       "locked_version": "0.3.6"
     },
+    "golang": {
+      "locked_version": "1.3.0"
+    },
+    "homebrew": {
+      "locked_version": "1.6.0"
+    },
+    "lxc": {
+      "locked_version": "1.1.8"
+    },
+    "dpkg_autostart": {
+      "locked_version": "0.1.10"
+    },
     "user": {
       "locked_version": "0.3.0"
     },
@@ -73,21 +97,6 @@
     },
     "ohai": {
       "locked_version": "1.1.12"
-    },
-    "docker": {
-      "locked_version": "0.24.2"
-    },
-    "golang": {
-      "locked_version": "1.3.0"
-    },
-    "lxc": {
-      "locked_version": "1.1.8"
-    },
-    "dpkg_autostart": {
-      "locked_version": "0.1.10"
-    },
-    "modules": {
-      "locked_version": "0.2.0"
     },
     "xml": {
       "locked_version": "1.2.4"
