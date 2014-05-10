@@ -23,9 +23,6 @@
     "mosh": {
       "locked_version": "0.3.0"
     },
-    "redisio": {
-      "locked_version": "1.7.1"
-    },
     "rsyslog": {
       "locked_version": "1.12.2"
     },
