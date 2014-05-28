@@ -7,6 +7,9 @@ DEPENDENCIES
   mosh
   rsyslog
   sysctl
+  td-agent
+    git: https://github.com/treasure-data/chef-td-agent.git
+    revision: e156802adf3cc19a56887ebfca544dc502e8776c
   ulimit
 
 GRAPH
@@ -26,6 +29,10 @@ GRAPH
     apt (>= 0.0.0)
   rsyslog (1.12.2)
   sysctl (0.4.0)
+  td-agent (0.0.1)
+    apt (>= 0.0.0)
+    yum (>= 0.0.0)
   ulimit (0.3.2)
   xml (1.2.4)
     build-essential (>= 0.0.0)
+  yum (3.2.0)
