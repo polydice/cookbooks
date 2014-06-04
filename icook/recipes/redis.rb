@@ -17,7 +17,7 @@ node[:deploy].each do |application, deploy|
 
       redis = Hash[node[:redis]]
       variables(
-        "host" => redis
+        "redis" => redis
       )
     end
   end
