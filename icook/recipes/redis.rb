@@ -14,8 +14,10 @@ node[:deploy].each do |application, deploy|
       mode 0755
       group deploy[:group]
       owner deploy[:user]
+
+      redis = Hash[node[:redis]]
       variables(
-        "host" => node[:redis]
+        "host" => redis
       )
     end
   end
