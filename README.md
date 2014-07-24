@@ -9,12 +9,6 @@ Most of cookbooks are drawn from other open source projects. Please check the li
 
 * iCook - For everything we need for iCook stack.
 
-## OpsWorks Official Cookbooks
-
-These cookbooks are taken from AWS's official repo of OpsWorks cookbooks for modification.
-
-* unicorn (commit: 68aca1)
-
 ## 3rd Party Cookbooks
 
 * [escapestudios/chef-newrelic](https://github.com/escapestudios/chef-newrelic) (commit: f556ca)
