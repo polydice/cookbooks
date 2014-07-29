@@ -5,10 +5,10 @@
 
 node[:deploy].each do |application, deploy|
   if deploy[:env]
-    file "/etc/profile.d/#{application}.sh" do
-      mode 0755
-      owner "root"
-      group "root"
+    file "/srv/www/#{application}/shared/.env" do
+      mode 0644
+      owner deploy[:user]
+      group deploy[:group]
       action :create
       content Dotenv.walk(deploy[:env]).join("\n")
     end
