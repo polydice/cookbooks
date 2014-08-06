@@ -1,0 +1,3 @@
+[submodule "fluentd"]
+	path = fluentd
+	url = https://github.com/polydice/cookbook-fluentd
