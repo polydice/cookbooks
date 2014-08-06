@@ -2,7 +2,7 @@ site :opscode
 
 cookbook 'ark'
 cookbook 'build-essential'
-cookbook 'elasticsearch'
+cookbook 'elasticsearch', git: 'https://github.com/polydice/cookbook-elasticsearch'
 cookbook 'ipaddr_extensions'
 cookbook 'java'
 cookbook 'mosh'
