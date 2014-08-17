@@ -7,8 +7,9 @@ DEPENDENCIES
   mosh
   rsyslog
   serverdensity
-    git: https://github.com/serverdensity/chef-serverdensity.git
-    revision: aa50d49d7729382d8014803dea5b23bca0f56db0
+    git: https://github.com/dlackty/chef-serverdensity.git
+    revision: 7d25bfa74b49ba3edcbb730118ec3a57324d3c87
+    branch: opsworks
   sysctl
   td-agent
     git: https://github.com/treasure-data/chef-td-agent.git
@@ -23,6 +24,7 @@ GRAPH
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
   build-essential (2.0.6)
+  chef-sugar (2.0.0)
   chef_handler (1.1.6)
   dpkg_autostart (0.1.10)
   elasticsearch (0.3.10)
@@ -33,6 +35,7 @@ GRAPH
     xml (>= 0.0.0)
   ipaddr_extensions (0.3.0)
   java (1.26.0)
+  monit (0.7.1)
   mosh (0.3.0)
     apt (>= 0.0.0)
   ohai (2.0.1)
@@ -49,4 +52,7 @@ GRAPH
   ulimit (0.3.2)
   windows (1.34.2)
     chef_handler (>= 0.0.0)
+  xml (1.2.6)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
   yum (3.2.2)
