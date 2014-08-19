@@ -6,10 +6,6 @@ DEPENDENCIES
   java
   mosh
   rsyslog
-  serverdensity
-    git: https://github.com/dlackty/chef-serverdensity.git
-    revision: 7d25bfa74b49ba3edcbb730118ec3a57324d3c87
-    branch: opsworks
   sysctl
   td-agent
     git: https://github.com/treasure-data/chef-td-agent.git
@@ -26,7 +22,6 @@ GRAPH
   build-essential (2.0.6)
   chef-sugar (2.0.0)
   chef_handler (1.1.6)
-  dpkg_autostart (0.1.10)
   elasticsearch (0.3.10)
     ark (>= 0.2.4)
     build-essential (>= 0.0.0)
@@ -40,10 +35,6 @@ GRAPH
     apt (>= 0.0.0)
   ohai (2.0.1)
   rsyslog (1.12.2)
-  serverdensity (2.0.0)
-    apt (>= 0.0.0)
-    dpkg_autostart (~> 0.1.6)
-    yum (>= 0.0.0)
   sysctl (0.6.0)
     ohai (>= 0.0.0)
   td-agent (0.0.1)
