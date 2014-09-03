@@ -2,7 +2,7 @@ site :opscode
 
 cookbook 'ark'
 cookbook 'build-essential'
-cookbook 'collectd', github: 'hectcastro/chef-collectd'
+cookbook 'collectd', github: 'dlackty/chef-collectd', branch: "http-plugin"
 cookbook 'elasticsearch'
 cookbook 'ipaddr_extensions'
 cookbook 'java'

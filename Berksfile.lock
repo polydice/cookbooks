@@ -2,8 +2,9 @@ DEPENDENCIES
   ark
   build-essential
   collectd
-    git: git://github.com/hectcastro/chef-collectd.git
-    revision: f7853c73f5975291d7cd06f8476c52f03c993203
+    git: git://github.com/dlackty/chef-collectd.git
+    revision: 10226279f6042ce4ef8baf08db968a999e536200
+    branch: http-plugin
   elasticsearch
   ipaddr_extensions
   java
