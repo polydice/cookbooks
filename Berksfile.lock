@@ -2,9 +2,8 @@ DEPENDENCIES
   ark
   build-essential
   collectd
-    git: git://github.com/dlackty/chef-collectd.git
-    revision: 10226279f6042ce4ef8baf08db968a999e536200
-    branch: http-plugin
+    git: git://github.com/hectcastro/chef-collectd.git
+    revision: e2b3ba631571f7cdee5e564ebae55ee213da58f8
   elasticsearch
   ipaddr_extensions
   java
@@ -26,7 +25,7 @@ GRAPH
   build-essential (2.0.6)
   chef-sugar (2.2.0)
   chef_handler (1.1.6)
-  collectd (0.4.2)
+  collectd (0.4.3)
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
   elasticsearch (0.3.10)
@@ -53,6 +52,6 @@ GRAPH
   xml (1.2.6)
     build-essential (>= 0.0.0)
     chef-sugar (>= 0.0.0)
-  yum (3.2.4)
-  yum-epel (0.4.0)
+  yum (3.3.1)
+  yum-epel (0.5.1)
     yum (~> 3.0)
