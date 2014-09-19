@@ -21,3 +21,11 @@ default[:nginx][:gzip_types] = ["application/atom+xml",
                                 "text/plain",
                                 "text/x-component",
                                 "text/xml"]
+
+# logrotate
+default[:nginx][:logrotate][:schedule] = "daily"
+default[:nginx][:logrotate][:rotate] = '7'
+default[:nginx][:logrotate][:delaycompress] = true
+default[:nginx][:logrotate][:mode] = '640'
+default[:nginx][:logrotate][:owner] = 'root'
+default[:nginx][:logrotate][:group] = 'adm'
