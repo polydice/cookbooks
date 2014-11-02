@@ -10,7 +10,6 @@
   create <%= node[:nginx][:logrotate][:mode] %> <%= node[:nginx][:logrotate][:owner] %> <%= node[:nginx][:logrotate][:group] %>
   sharedscripts
   postrotate
-  if [ -f "<%= node[:nginx][:pid_file] %>" ]; then
-    [ -s <%= node[:nginx][:pid_file] %> ] && kill -USR1 `cat <%= node[:nginx][:pid_file] %>`
+  [ -s <%= node[:nginx][:pid_file] %> ] && kill -USR1 `cat <%= node[:nginx][:pid_file] %>`
   endscript
 }
