@@ -5,6 +5,8 @@ DEPENDENCIES
     git: git://github.com/hectcastro/chef-collectd.git
     revision: e2b3ba631571f7cdee5e564ebae55ee213da58f8
   elasticsearch
+    git: git://github.com/elasticsearch/cookbook-elasticsearch.git
+    revision: ed0a9d0e16371663177b4079acc645abc4ebb1a0
   ipaddr_extensions
   java
   mosh
@@ -28,7 +30,7 @@ GRAPH
   collectd (0.4.3)
     build-essential (>= 0.0.0)
     yum-epel (>= 0.0.0)
-  elasticsearch (0.3.10)
+  elasticsearch (0.3.11)
     ark (>= 0.2.4)
     build-essential (>= 0.0.0)
     java (>= 0.0.0)
@@ -36,7 +38,7 @@ GRAPH
     xml (>= 0.0.0)
   ipaddr_extensions (0.3.0)
   java (1.28.0)
-  monit (0.7.1)
+  monit (0.7.5)
   mosh (0.3.0)
     apt (>= 0.0.0)
   ohai (2.0.1)

@@ -3,7 +3,7 @@ source "https://supermarket.getchef.com"
 cookbook 'ark'
 cookbook 'build-essential'
 cookbook 'collectd', github: 'hectcastro/chef-collectd'
-cookbook 'elasticsearch'
+cookbook 'elasticsearch', github: 'elasticsearch/cookbook-elasticsearch'
 cookbook 'ipaddr_extensions'
 cookbook 'java'
 cookbook 'mosh'
