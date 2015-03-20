@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe "td-agent::default"
 
 if url = node[:fluentd][:config_url]
   service "td-agent" do
