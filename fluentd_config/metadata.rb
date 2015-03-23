@@ -1,3 +1,4 @@
+name             "fluentd"
 maintainer       "Richard Lee"
 maintainer_email "richard@polydice.com"
 license          "Apache 2.0"

@@ -22,3 +22,9 @@ if url = node[:fluentd][:config_url]
     notifies :restart, "service[td-agent]"
   end
 end
+
+group "www-data" do
+  action :modify
+  members "td-agent"
+  append true
+end
