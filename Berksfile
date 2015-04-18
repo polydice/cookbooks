@@ -1,5 +1,6 @@
 source "https://supermarket.getchef.com"
 
+cookbook 'apt'
 cookbook 'ark'
 cookbook 'build-essential'
 cookbook 'collectd', github: 'hectcastro/chef-collectd'
