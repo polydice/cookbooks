@@ -1,6 +1,5 @@
 source "https://supermarket.getchef.com"
 
-cookbook 'apt'
 cookbook 'ark'
 cookbook 'build-essential'
 cookbook 'collectd', github: 'hectcastro/chef-collectd'
@@ -16,3 +15,4 @@ cookbook 'ulimit'
 cookbook 'sidekiq', github: 'dlackty/opsworks-sidekiq'
 cookbook 'opsworks_wordpress', github: 'polydice/opsworks_wordpress'
 cookbook 'opsworks-layer-json-attributes', github: 'jcoleman/opsworks-layer-json-attributes-cookbook'
+cookbook 'monit'

@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-
-include_recipe "apt"
 include_recipe "monit"
 include_recipe "java"
 include_recipe "elasticsearch"
