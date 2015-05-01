@@ -12,6 +12,7 @@ include_recipe "java"
 include_recipe "elasticsearch"
 include_recipe "elasticsearch::monit"
 include_recipe "elasticsearch::plugins"
+include_recipe "elasticsearch::aws"
 
 if url = node[:elasticsearch][:corpus][:ik]
   script "install_ik_data" do
