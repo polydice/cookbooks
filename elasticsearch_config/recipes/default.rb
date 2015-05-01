@@ -18,7 +18,7 @@ if url = node[:elasticsearch][:corpus][:ik]
   script "install_ik_data" do
     interpreter "bash"
     user "root"
-    cwd node[:elasticsearch][:path]
+    cwd node[:elasticsearch][:default_path]
     code <<-EOH
       wget #{url}
       tar -zxf ik.tar.gz
