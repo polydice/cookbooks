@@ -1,0 +1,13 @@
+octopus:
+  replicated: true
+  production:
+    <% @database[:slaves].each_with_index do |slave, i| %>
+    slave<%= i %>:
+      adapter: <%= @database[:adapter].to_s.inspect %>
+      database: <%= @database[:database].to_s.inspect %>
+      encoding: <%= (@database[:encoding] || 'utf8').to_s.inspect %>
+      host: <%= slave.to_s.inspect %>
+      username: <%= @database[:username].to_s.inspect %>
+      password: <%= @database[:password].to_s.inspect %>
+      reconnect: <%= @database[:reconnect] ? 'true' : 'false' %>
+    <% end %>

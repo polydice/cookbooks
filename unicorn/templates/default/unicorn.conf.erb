@@ -29,6 +29,12 @@ end
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
+  if defined?(ActiveRecord::Base.connection_proxy)
+    ActiveRecord::Base.connection_proxy.instance_variable_get(:@shards).each do |shard, connection_pool|
+      connection_pool.disconnect!
+    end
+  end
+
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.connection.disconnect!
   end
@@ -51,6 +57,12 @@ end
 
 after_fork do |server, worker|
   # the following is *required* for Rails + "preload_app true",
+  if defined?(ActiveRecord::Base.connection_proxy)
+    ActiveRecord::Base.connection_proxy.instance_variable_get(:@shards).each do |shard, connection_pool|
+      connection_pool.clear_reloadable_connections!
+    end
+  end
+
   if defined?(ActiveRecord::Base)
     ActiveRecord::Base.establish_connection
   end
