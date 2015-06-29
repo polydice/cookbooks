@@ -7,3 +7,9 @@ group "www-data" do
   members "td-agent"
   append true
 end
+
+group "adm" do
+  action :modify
+  members "td-agent"
+  append true
+end
