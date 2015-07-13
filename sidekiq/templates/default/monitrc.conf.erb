@@ -3,6 +3,5 @@ check process sidekiq_<%= @app_name %>_<%= num %>
   with pidfile <%= @deploy[:deploy_to] %>/shared/pids/sidekiq<%= num %>.pid
   start program = "/usr/bin/sudo su - deploy -c 'cd <%= @deploy[:deploy_to] %>/current; RAILS_ENV=production bundle exec sidekiq -d -C config/sidekiq.yml -P <%= @deploy[:deploy_to] %>/shared/pids/sidekiq<%= num %>.pid -L log/sidekiq.log'" with timeout 90 seconds
   stop program = "/bin/bash -c '/bin/kill -TERM `cat <%= @deploy[:deploy_to] %>/shared/pids/sidekiq<%= num %>.pid`'" with timeout 180 seconds
-  if totalmem is greater than 320 MB for 2 cycles then restart # eating up memory?
   group sidekiq_<%= @app_name %>
 <% end %>
