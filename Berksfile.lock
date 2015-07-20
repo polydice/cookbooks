@@ -11,6 +11,9 @@ DEPENDENCIES
   ipaddr_extensions
   java
   mosh
+  opsworks-layer-json-attributes
+    git: git://github.com/jcoleman/opsworks-layer-json-attributes-cookbook.git
+    revision: 09bf7adc1e931e05241893737e4efdee1b85e893
   opsworks_wordpress
     git: git://github.com/polydice/opsworks_wordpress.git
     revision: 136b6309626a7a60506e9f269d7604ed88908ee3
@@ -70,6 +73,7 @@ GRAPH
   ohai (2.0.1)
   openssl (4.2.0)
     chef-sugar (>= 0.0.0)
+  opsworks-layer-json-attributes (0.1.0)
   opsworks_wordpress (0.1.0)
     hhvm (>= 0.0.0)
     openssl (>= 0.0.0)
