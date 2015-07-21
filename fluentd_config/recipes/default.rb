@@ -9,7 +9,13 @@
 
 include_recipe "td-agent::default"
 
-if url = node[:fluentd][:config_url]
+url = if node[:fluentd][:config_url].is_a?(String)
+        node[:fluentd][:config_url]
+      else
+        node[:fluentd][:config_url][node[:opsworks][:instance][:layers][0]]
+      end
+
+if url
   service "td-agent" do
     action [ :enable, :start ]
   end
