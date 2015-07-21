@@ -1,5 +1,5 @@
 consul_check_def "hhvm" do
-  http "http://localhost:8889/check-health"
+  http "http://localhost:9000/check-health"
   interval "30s"
 end
 
