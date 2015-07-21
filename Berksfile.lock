@@ -16,7 +16,7 @@ DEPENDENCIES
     revision: 09bf7adc1e931e05241893737e4efdee1b85e893
   opsworks_wordpress
     git: git://github.com/polydice/opsworks_wordpress.git
-    revision: 136b6309626a7a60506e9f269d7604ed88908ee3
+    revision: d9ebfa25640d0e637d2ae668dc8bcacf09a80e9f
   rsyslog
   sidekiq
     git: git://github.com/dlackty/opsworks-sidekiq.git
