@@ -6,7 +6,7 @@ remote_file "/usr/local/bin/check_elasticsearch" do
   action :create
 end
 
-consul_def_check "elasticsearch" do
+consul_check_def "elasticsearch" do
   script "/usr/local/bin/check_elasticsearch"
   interval "30s"
 end
