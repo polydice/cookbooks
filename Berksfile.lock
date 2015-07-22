@@ -10,6 +10,7 @@ DEPENDENCIES
     revision: b37ce9f44e136cc712fedb9e0d927717033551df
   ipaddr_extensions
   java
+  monit
   mosh
   opsworks-layer-json-attributes
     git: git://github.com/jcoleman/opsworks-layer-json-attributes-cookbook.git
@@ -66,6 +67,7 @@ GRAPH
   libarchive (0.4.4)
     apt (~> 2.5)
     build-essential (~> 2.0)
+  monit (0.7.5)
   mosh (0.4.0)
     apt (>= 0.0.0)
     yum (>= 0.0.0)
@@ -97,3 +99,6 @@ GRAPH
   yum-repoforge (0.5.3)
     yum (~> 3.2)
     yum-epel (>= 0.0.0)
+  xml (1.2.13)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
