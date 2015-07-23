@@ -6,7 +6,12 @@ remote_file "/usr/local/bin/check_elasticsearch" do
   action :create
 end
 
-consul_check_def "elasticsearch" do
-  script "/usr/local/bin/check_elasticsearch"
-  interval "30s"
+consul_service_def "elasticsearch" do
+  port 9200
+  tags ["elasticsearch"]
+  check(
+    script: "/usr/local/bin/check_elasticsearch",
+    interval: "30s"
+  )
+  notifies :reload, "service[consul]"
 end
