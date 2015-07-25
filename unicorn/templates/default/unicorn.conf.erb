@@ -43,10 +43,12 @@ before_fork do |server, worker|
   # This enables 0 downtime deploys.
   old_pid = "<%= @deploy[:deploy_to]%>/shared/pids/unicorn.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
+    logger = Logger.new(STDERR)
+    logger.info("I am in!")
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
-      # someone else did our job for us
+      logger.fatal("Process is not killed for some reason: #{err}")
     end
   end
 
