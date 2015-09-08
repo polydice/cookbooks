@@ -5,9 +5,7 @@ DEPENDENCIES
     git: git://github.com/hectcastro/chef-collectd.git
     revision: 3d905c244f9d7a633037db8326bb52639162a3ea
   consul
-  elasticsearch
-    git: git://github.com/elasticsearch/cookbook-elasticsearch.git
-    revision: b37ce9f44e136cc712fedb9e0d927717033551df
+  elasticsearch (< 1.0.0)
   ipaddr_extensions
   java
   monit
@@ -50,14 +48,8 @@ GRAPH
     packagecloud (>= 0.0.0)
     runit (>= 0.0.0)
     yum-repoforge (>= 0.0.0)
-  curl (2.0.1)
-  elasticsearch (1.0.0)
-    apt (~> 2.7.0)
-    ark (~> 0.9.0)
-    chef-sugar (~> 3.1.0)
-    curl (~> 2.0.1)
-    poise (~> 2.0.1)
-    yum (~> 3.6.1)
+  elasticsearch (0.3.14)
+    ark (>= 0.2.4)
   golang (1.5.1)
   hhvm (0.6.0)
     apt (>= 0.0.0)
@@ -80,7 +72,6 @@ GRAPH
     hhvm (>= 0.0.0)
     openssl (>= 0.0.0)
   packagecloud (0.0.19)
-  poise (2.0.1)
   rsyslog (2.0.0)
   runit (1.7.2)
     packagecloud (>= 0.0.0)
@@ -93,12 +84,12 @@ GRAPH
   ulimit (0.3.3)
   windows (1.37.0)
     chef_handler (>= 0.0.0)
+  xml (1.2.13)
+    build-essential (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
   yum (3.6.3)
   yum-epel (0.6.2)
     yum (~> 3.2)
   yum-repoforge (0.5.3)
     yum (~> 3.2)
     yum-epel (>= 0.0.0)
-  xml (1.2.13)
-    build-essential (>= 0.0.0)
-    chef-sugar (>= 0.0.0)
