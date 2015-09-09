@@ -20,12 +20,9 @@ if url = node[:elasticsearch][:corpus][:ik]
     user "root"
     cwd node[:elasticsearch][:default_path]
     code <<-EOH
+      rm ik.tar.gz*
       wget #{url}
       tar -zxf ik.tar.gz
     EOH
   end
 end
-
-
-
-
