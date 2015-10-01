@@ -5,7 +5,7 @@
 
 node[:deploy].each do |application, deploy|
   release_path = ::File.join(deploy[:deploy_to], 'current')
-  env = deploy['environment_variables'] || { "HOME" => "/home/#{deploy[:user]}", "RAILS_ENV" => "production" }
+  env = { "HOME" => "/home/#{deploy[:user]}", "RAILS_ENV" => "production" }.merge(deploy['environment_variables'] || {})
   template "setup clockwork.conf" do
     path "/etc/init/clockwork-#{application}.conf"
     source "clockwork.conf.erb"
