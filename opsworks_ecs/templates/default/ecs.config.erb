@@ -8,3 +8,6 @@ ECS_ENGINE_AUTH_TYPE=<%= node["opsworks_ecs"]["auth"]["type"] %>
 <% if node["opsworks_ecs"]["auth"]["data"] -%>
 ECS_ENGINE_AUTH_DATA=<%= node["opsworks_ecs"]["auth"]["data"] %>
 <% end -%>
+<% if node["opsworks_ecs"]["logging_drivers"] -%>
+ECS_AVAILABLE_LOGGING_DRIVERS=<%= node["opsworks_ecs"]["logging_drivers"].to_json %>
+<% end -%>
