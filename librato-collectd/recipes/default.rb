@@ -13,11 +13,6 @@ end
 
 package "collectd"
 
-service "collectd" do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
-end
-
 file '/opt/collectd/etc/collectd.conf.d/librato.conf' do
   f = Chef::Util::FileEdit.new(path)
   f.search_file_replace(%r{User ""},
@@ -25,5 +20,7 @@ file '/opt/collectd/etc/collectd.conf.d/librato.conf' do
   f.search_file_replace(%r{Password ""},
                         "Password \"#{node[:librato][:collectd][:password]}\"")
   f.write_file
-  notifies :restart, 'service[collectd]'
+  notifies :restart, "service[collectd]"
 end
+
+include_recipe 'librato-collectd::_service'
