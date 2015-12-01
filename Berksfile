@@ -2,7 +2,6 @@ source "https://supermarket.getchef.com"
 
 cookbook 'ark'
 cookbook 'build-essential'
-cookbook 'collectd', github: 'hectcastro/chef-collectd'
 cookbook 'consul'
 cookbook 'elasticsearch', '< 1'
 cookbook 'ipaddr_extensions'
