@@ -20,3 +20,4 @@ cookbook 'monit'
 # Before Chef 12
 cookbook 'firewall', '< 2'
 cookbook 'poise', '< 2'
+cookbook 'libarchive', '< 0.5'

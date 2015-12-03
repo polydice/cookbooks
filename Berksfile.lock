@@ -9,6 +9,7 @@ DEPENDENCIES
     git: git://github.com/agileorbit-cookbooks/java.git
     revision: 00b9c8c04e3684adcb7ae802cdea1bd9ae28c317
   jenkins
+  libarchive (< 0.5.0)
   monit
   mosh
   opsworks-layer-json-attributes
@@ -36,19 +37,17 @@ GRAPH
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
   build-essential (2.2.4)
+  chef-provisioning (0.1.2)
+    build-essential (>= 0.0.0)
   chef-sugar (3.1.1)
   chef_handler (1.2.0)
-  chocolatey (0.6.1)
-    windows (~> 1.38)
   compat_resource (12.5.14)
-  consul (0.11.1)
+  consul (0.10.1)
     chef-provisioning (>= 0.0.0)
-    chocolatey (>= 0.0.0)
     golang (~> 1.4)
-    libarchive (>= 0.6.0)
+    libarchive (~> 0.4.0)
     packagecloud (>= 0.0.0)
     runit (>= 0.0.0)
-    windows (>= 0.0.0)
     yum-repoforge (>= 0.0.0)
   elasticsearch (0.3.14)
     ark (>= 0.2.4)
@@ -65,9 +64,9 @@ GRAPH
     apt (~> 2.0)
     runit (~> 1.5)
     yum (~> 3.0)
-  libarchive (0.6.1)
+  libarchive (0.4.4)
     apt (~> 2.5)
-    yum-epel (~> 0.6)
+    build-essential (~> 2.0)
   monit (0.7.5)
   mosh (0.4.0)
     apt (>= 0.0.0)
