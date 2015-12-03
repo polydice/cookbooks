@@ -16,4 +16,7 @@ cookbook 'sidekiq', github: 'dlackty/opsworks-sidekiq'
 cookbook 'opsworks_wordpress', github: 'polydice/opsworks_wordpress'
 cookbook 'opsworks-layer-json-attributes', github: 'jcoleman/opsworks-layer-json-attributes-cookbook'
 cookbook 'monit'
+
+# Before Chef 12
 cookbook 'firewall', '< 2'
+cookbook 'poise', '< 2'
