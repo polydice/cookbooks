@@ -20,9 +20,6 @@ DEPENDENCIES
     revision: d9ebfa25640d0e637d2ae668dc8bcacf09a80e9f
   poise (< 2.0.0)
   rsyslog
-  sidekiq
-    git: git://github.com/dlackty/opsworks-sidekiq.git
-    revision: 0762bf8e5425aad502f45362e84d76d8e77845a2
   sysctl
   td-agent
     git: git://github.com/treasure-data/chef-td-agent.git
@@ -83,9 +80,8 @@ GRAPH
   poise (1.0.12)
   rsyslog (3.0.0)
     compat_resource (>= 0.0.0)
-  runit (1.7.4)
+  runit (1.7.6)
     packagecloud (>= 0.0.0)
-  sidekiq (1.0.0)
   sysctl (0.6.2)
     ohai (>= 0.0.0)
   td-agent (2.1.5)
@@ -97,6 +93,6 @@ GRAPH
   yum (3.8.2)
   yum-epel (0.6.5)
     yum (~> 3.2)
-  yum-repoforge (0.5.5)
+  yum-repoforge (0.5.7)
     yum (~> 3.2)
     yum-epel (>= 0.0.0)
