@@ -1,16 +1,10 @@
 source "https://supermarket.getchef.com"
 
-cookbook 'ark'
 cookbook 'build-essential'
-cookbook 'consul'
-cookbook 'elasticsearch'
-cookbook 'ipaddr_extensions'
 cookbook 'java'
 cookbook 'jenkins'
 cookbook 'mosh'
-cookbook 'rsyslog'
 cookbook 'sysctl'
 cookbook 'td-agent'
 cookbook 'ulimit'
 cookbook 'opsworks-layer-json-attributes', github: 'jcoleman/opsworks-layer-json-attributes-cookbook'
-cookbook 'monit'
