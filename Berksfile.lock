@@ -1,5 +1,6 @@
 DEPENDENCIES
   build-essential
+  docker
   java
   jenkins
   mosh
@@ -13,6 +14,9 @@ DEPENDENCIES
 GRAPH
   apt (2.9.2)
   build-essential (2.2.4)
+  compat_resource (12.7.1)
+  docker (2.4.11)
+    compat_resource (~> 12.7.1)
   java (1.39.0)
     apt (>= 0.0.0)
   jenkins (2.4.1)
