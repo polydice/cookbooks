@@ -9,3 +9,6 @@ cookbook 'opsworks-layer-json-attributes', github: 'jcoleman/opsworks-layer-json
 cookbook 'sysctl'
 cookbook 'td-agent'
 cookbook 'ulimit'
+cookbook 'fluentd_config', path: "./fluentd_config/"
+cookbook 'ecs', path: "./ecs/"
+cookbook 'librato-collectd', path: "./librato-collectd/"

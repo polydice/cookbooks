@@ -1,8 +1,14 @@
 DEPENDENCIES
   build-essential
   docker
+  ecs
+    path: ecs
+  fluentd_config
+    path: fluentd_config
   java
   jenkins
+  librato-collectd
+    path: librato-collectd
   mosh
   opsworks-layer-json-attributes
     git: git://github.com/jcoleman/opsworks-layer-json-attributes-cookbook.git
@@ -17,12 +23,19 @@ GRAPH
   compat_resource (12.7.1)
   docker (2.4.11)
     compat_resource (~> 12.7.1)
+  ecs (0.1.0)
+    apt (>= 0.0.0)
+    docker (>= 0.0.0)
+  fluentd_config (0.1.0)
+    td-agent (>= 0.0.0)
   java (1.39.0)
     apt (>= 0.0.0)
   jenkins (2.4.1)
     apt (~> 2.0)
     runit (~> 1.5)
     yum (~> 3.0)
+  librato-collectd (0.1.0)
+    packagecloud (>= 0.0.0)
   mosh (0.4.0)
     apt (>= 0.0.0)
     yum (>= 0.0.0)

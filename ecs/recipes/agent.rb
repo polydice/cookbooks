@@ -1,0 +1,31 @@
+%w(/var/log/ecs /etc/ecs /var/lib/ecs/data).each do |dir|
+  directory dir do
+    recursive true
+  end
+end
+
+docker_image 'amazon/amazon-ecs-agent' do
+  tag 'latest'
+  action :pull
+end
+
+docker_container 'ecs-agent' do
+  env [
+    'ECS_LOGFILE=/log/ecs-agent.log',
+    'ECS_DATADIR=/data/',
+    'ECS_APPARMOR_CAPABLE=true'
+  ].concat(node[:ecs] || [])
+  port '127.0.0.1:51678:51678'
+  repo 'amazon/amazon-ecs-agent'
+  restart_maximum_retry_count 10
+  restart_policy 'on-failure'
+  tag 'latest'
+  volumes [
+    '/var/run/docker.sock:/var/run/docker.sock',
+    '/var/log/ecs:/log',
+    '/var/lib/ecs/data:/data',
+    '/var/lib/docker:/var/lib/docker',
+    '/sys/fs/cgroup:/sys/fs/cgroup:ro',
+    '/var/run/docker/execdriver/native:/var/lib/docker/execdriver/native:ro'
+   ]
+end

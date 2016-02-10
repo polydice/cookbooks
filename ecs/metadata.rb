@@ -1,8 +1,9 @@
-name             "fluentd_config"
+name             "ecs"
 maintainer       "Richard Lee"
 maintainer_email "richard@polydice.com"
 license          "Apache 2.0"
-description      "Configures Fluentd."
+description      "Setup ECS"
 version          "0.1.0"
 
-depends "td-agent"
+depends "apt"
+depends "docker"
