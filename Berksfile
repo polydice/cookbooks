@@ -1,6 +1,7 @@
 source "https://supermarket.getchef.com"
 
 cookbook 'build-essential'
+cookbook 'datadog'
 cookbook 'docker'
 cookbook 'java'
 cookbook 'jenkins'
