@@ -2,6 +2,7 @@ DEPENDENCIES
   ark
   build-essential
   consul
+  datadog
   elasticsearch (< 1.0.0)
   firewall (< 2.0.0)
   ipaddr_extensions
@@ -46,6 +47,10 @@ GRAPH
     packagecloud (>= 0.0.0)
     runit (>= 0.0.0)
     yum-repoforge (>= 0.0.0)
+  datadog (0.1.2)
+    apt (>= 0.0.0)
+    chef_handler (>= 1.0.6)
+    yum (>= 0.0.0)
   elasticsearch (0.3.14)
     ark (>= 0.2.4)
   firewall (1.6.2)
@@ -76,7 +81,7 @@ GRAPH
   opsworks_wordpress (0.1.0)
     hhvm (>= 0.0.0)
     openssl (>= 0.0.0)
-  packagecloud (0.1.1)
+  packagecloud (0.2.0)
   poise (1.0.12)
   rsyslog (3.0.0)
     compat_resource (>= 0.0.0)

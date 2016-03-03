@@ -3,6 +3,7 @@ source "https://supermarket.getchef.com"
 cookbook 'ark'
 cookbook 'build-essential'
 cookbook 'consul'
+cookbook 'datadog'
 cookbook 'elasticsearch', '< 1'
 cookbook 'ipaddr_extensions'
 cookbook 'java', github: 'agileorbit-cookbooks/java'
