@@ -20,8 +20,8 @@ DEPENDENCIES
 GRAPH
   apt (2.9.2)
   build-essential (2.2.4)
-  compat_resource (12.7.1)
-  docker (2.4.11)
+  compat_resource (12.7.3)
+  docker (2.5.8)
     compat_resource (~> 12.7.1)
   ecs (0.1.0)
     apt (>= 0.0.0)
