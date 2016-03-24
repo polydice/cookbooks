@@ -10,6 +10,7 @@ docker_image 'amazon/amazon-ecs-agent' do
 end
 
 docker_container 'ecs-agent' do
+  action :run_if_missing
   env [
     'ECS_LOGFILE=/log/ecs-agent.log',
     'ECS_DATADIR=/data/',
