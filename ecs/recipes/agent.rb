@@ -18,8 +18,7 @@ docker_container 'ecs-agent' do
   ].concat(node[:ecs] || [])
   port '127.0.0.1:51678:51678'
   repo 'amazon/amazon-ecs-agent'
-  restart_maximum_retry_count 10
-  restart_policy 'on-failure'
+  restart_policy 'always'
   tag 'latest'
   volumes [
     '/var/run/docker.sock:/var/run/docker.sock',
