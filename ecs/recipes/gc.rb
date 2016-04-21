@@ -1,6 +1,6 @@
 docker_image 'jamescookie/docker-gc' do
   tag 'latest'
-  action :pull
+  action :pull_if_missing
 end
 
 docker_container 'docker-gc' do

@@ -6,7 +6,7 @@ end
 
 docker_image 'amazon/amazon-ecs-agent' do
   tag 'latest'
-  action :pull
+  action :pull_if_missing
 end
 
 docker_container 'ecs-agent' do

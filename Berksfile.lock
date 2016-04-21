@@ -28,7 +28,7 @@ GRAPH
     chef_handler (~> 1.1.0)
     windows (>= 0.0.0)
     yum (>= 0.0.0)
-  docker (2.6.3)
+  docker (2.6.8)
     compat_resource (>= 12.9.0)
   ecs (0.1.0)
     apt (>= 0.0.0)
