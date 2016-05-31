@@ -5,7 +5,6 @@
 end
 
 docker_image 'amazon/amazon-ecs-agent' do
-  tag 'latest'
   action :pull_if_missing
 end
 
@@ -19,7 +18,6 @@ docker_container 'ecs-agent' do
   port '127.0.0.1:51678:51678'
   repo 'amazon/amazon-ecs-agent'
   restart_policy 'always'
-  tag 'latest'
   volumes [
     '/var/run/docker.sock:/var/run/docker.sock',
     '/var/log/ecs:/log',
