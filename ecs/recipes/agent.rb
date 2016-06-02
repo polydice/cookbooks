@@ -5,7 +5,7 @@
 end
 
 docker_image 'amazon/amazon-ecs-agent' do
-  tag node["ecs"]["agent_version"]
+  tag node[:ecs][:agent_version]
   action :pull_if_missing
 end
 
@@ -15,7 +15,7 @@ docker_container 'ecs-agent' do
     'ECS_LOGFILE=/log/ecs-agent.log',
     'ECS_DATADIR=/data/',
     'ECS_APPARMOR_CAPABLE=true'
-  ].concat(node[:ecs] || [])
+  ].concat(node[:ecs][:config] || [])
   port '127.0.0.1:51678:51678'
   repo 'amazon/amazon-ecs-agent'
   restart_policy 'always'
