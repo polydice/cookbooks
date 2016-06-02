@@ -7,6 +7,7 @@ end
 docker_image 'amazon/amazon-ecs-agent' do
   tag node[:ecs][:agent_version]
   action :pull_if_missing
+  retries 5
 end
 
 docker_container 'ecs-agent' do
